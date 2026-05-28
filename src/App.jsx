@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useState } from 'react'
+import { MyRouters } from './routers/router'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   return (
     <>
-      <div className='w-full text-center'>
-        <h1 className='text-3xl'>Hello Word</h1>
-      </div>
+      <MyRouters />
     </>
   )
 }
