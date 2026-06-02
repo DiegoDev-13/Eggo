@@ -1,13 +1,34 @@
+import { useForm } from 'react-hook-form';
 import imgLogin from '../assets/img-login.png'
 import { FormLogin } from '../components/login/FormLogin';
 import { LogoGreen } from '../components/shared/LogoGreen';
 import { Separator } from '../components/shared/Separator';
+import { useLogin } from '../hooks/auth/useLogin';
 import { useGlobalStore } from '../store/global.store'
 import { IoAnalytics } from "react-icons/io5";
 
 export const Login = () => {
 
   const {changeTheme} = useGlobalStore()
+
+  const {mutate, isPending} = useLogin()
+
+  const {register, handleSubmit, formState: {errors}} = useForm()
+
+  const onSubmit = data => {
+        
+        const dataUser = {
+            userName: data.userName,
+            farmName: data.farmName,
+            email: data.email,
+            password: data.password,
+            
+        }
+
+        mutate({dataUser})
+    }
+
+  if(isPending) return <h1 className='text-xl'>Cargando...</h1>
 
   return (
     <>
@@ -42,7 +63,7 @@ export const Login = () => {
 
             <Separator />
 
-            <FormLogin />
+            <FormLogin handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />
           </div>
         </div>
       </div>

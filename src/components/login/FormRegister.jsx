@@ -3,6 +3,10 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 import { MdLockOutline, MdOutlineEmail } from "react-icons/md"
 import { BtnSave } from "../shared/BtnSave"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { userRegisterSchema } from "../../lib/validators"
+import { useRegister } from "../../hooks/auth/useRegister"
 
 export const FormRegister = () => {
 
@@ -10,45 +14,73 @@ export const FormRegister = () => {
 
     const navigate = useNavigate()
 
-    const sendForm = (e) => {
-        e.preventDefault()
+    const {mutate, isPending} = useRegister()
 
-        console.log('enviado')
+    const {register, handleSubmit, formState: {errors}} = useForm({
+        resolver: zodResolver(userRegisterSchema)
+    })
+
+    const onSubmit = data => {
+        
+        const dataUser = {
+            userName: data.userName,
+            farmName: data.farmName,
+            email: data.email,
+            password: data.password,
+            
+        }
+
+        mutate({dataUser})
     }
 
+    if(isPending) return <h1>Cargando...</h1>
+
+
   return (
-    <form className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
 
         <div className="flex w-full gap-5 items-center">
             <div className="w-full flex flex-col space-y-2">
-                <label htmlFor="" className="text-base md:text-sm dark:text-white">Nombre completo</label>
-                <input type="text" placeholder="John Doe" className="outline-none w-full dark:text-white bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600" />
+                <label htmlFor="userName" className="text-base md:text-sm dark:text-white">Nombre completo</label>
+                <input type="text" placeholder="John Doe" id="userName" {...register("userName")} className="outline-none w-full dark:text-white bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600" />
+                {
+                    errors.userName && <span className="text-sm text-red-500">{errors.userName.message}</span>
+                }
             </div>
             <div className="w-full flex flex-col space-y-2">
-                <label htmlFor="" className="text-sm dark:text-white">Nombre de la granja</label>
-                <input type="text" placeholder="Green Vally Poultry" className="outline-none w-full dark:text-white bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600" />
+                <label htmlFor="farmName" className="text-sm dark:text-white">Nombre de la granja</label>
+                <input type="text" placeholder="Green Vally Poultry" id="farmName" {...register("farmName")} className="outline-none w-full dark:text-white bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600" />
+                {
+                    errors.farmName && <span className="text-sm text-red-500">{errors.farmName.message}</span>
+                }
             </div>
         </div>
 
         <div className="flex flex-col space-y-2">
-            <label htmlFor="" className="text-base md:text-sm dark:text-white">Correo electrónico</label>
+            <label htmlFor="email" className="text-base md:text-sm dark:text-white">Correo electrónico</label>
             <div className="flex items-center w-full bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600">
                 <MdOutlineEmail size={20} className="dark:text-white" />
-                <input type="text" placeholder="name@company.com" className="p-2 outline-none w-full dark:text-white" />
+                <input type="text" placeholder="name@company.com" id="email" {...register("email")} className="p-2 outline-none w-full dark:text-white" />
             </div>
+            {
+                errors.email && <span className="text-sm text-red-500">{errors.email.message}</span>
+            }
         </div>
 
         <div className="flex flex-col space-y-2">
             <div className="flex justify-between">
-                <label htmlFor="" className="text-base md:text-sm dark:text-white">Contraseña</label>
+                <label htmlFor="password" className="text-base md:text-sm dark:text-white">Contraseña</label>
             </div>
             <div className="flex items-center w-full bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600">
                 <MdLockOutline size={20} className="dark:text-white" />
-                <input type={showPassword ? 'text' : 'password'} placeholder="password" className="p-2 outline-none w-full dark:text-white" />
+                <input type={showPassword ? 'text' : 'password'} placeholder="password" id="password" {...register("password")} className="p-2 outline-none w-full dark:text-white" />
                 {
                     showPassword ? <IoEyeOffOutline size={22} className="cursor-pointer dark:text-white" onClick={() => setShowPassword(!showPassword)} /> : <IoEyeOutline size={22} className="cursor-pointer dark:text-white" onClick={() => setShowPassword(!showPassword)}/>
                 }
             </div>
+            {
+                errors.password && <span className="text-sm text-red-500">{errors.password.message}</span>
+            }
         </div>
         <div className="flex space-x-2 items-center">
             <input type="checkbox" id="inputCheck" />
@@ -56,7 +88,7 @@ export const FormRegister = () => {
             <span className="text-base md:text-sm font-semibold text-theme-text-green dark:text-green-500 cursor-pointer">Términos de servicio y política de privacidad.</span>
         </div>
 
-        <BtnSave text='Iniciar sesión' color='bg-primaryDark-green' darkColor='dark:bg-green-500' tFunction={sendForm}/>
+        <BtnSave text='Iniciar sesión' color='bg-primaryDark-green' darkColor='dark:bg-green-500'  />
 
         <p className="text-base md:text-sm dark:text-white mt-2 self-center">¿Ya tienes una cuenta? <span className="text-primary-green dark:text-green-500 cursor-pointer font-semibold" onClick={() => navigate('/login')}>Inicia sesión</span></p>
     </form>

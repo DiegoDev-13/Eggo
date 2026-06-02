@@ -4,7 +4,7 @@ import App from "../App"
 export const RootLayout = () => {
   return (
     <>
-        <main>
+        <main className="container flex-1  ">
             <Outlet />
         </main>
     </>

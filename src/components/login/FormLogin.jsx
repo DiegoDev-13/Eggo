@@ -4,14 +4,14 @@ import { useState } from "react";
 import { BtnSave } from "../shared/BtnSave";
 import { useNavigate } from "react-router-dom";
 
-export const FormLogin = () => {
+export const FormLogin = ({handleSubmit, onSubmit, register}) => {
 
     const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
 
   return (
-    <form className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
+    <form onSubmit={handleSubmit()} className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
         <div className="flex flex-col space-y-2">
             <label htmlFor="" className="text-base md:text-sm dark:text-white">Correo electrónico</label>
             <div className="flex items-center w-full bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600">
