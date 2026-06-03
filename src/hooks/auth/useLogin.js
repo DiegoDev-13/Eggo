@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { singIn } from "../../actions/auth"
 import { useNavigate } from "react-router-dom"
+import Swal from 'sweetalert2'
 
 export const useLogin = () => {
 
@@ -11,10 +12,15 @@ export const useLogin = () => {
         mutationFn: singIn,
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['user']})
-            navigate('/')
+            navigate('/', {replace: true})
         },
         onError: (err) => {
-            throw new Error(err.message);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: err.message,
+                confirmButtonColor: '#2E7D32'
+            });
         }
     })
 

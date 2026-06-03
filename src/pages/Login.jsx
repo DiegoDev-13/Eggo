@@ -6,34 +6,39 @@ import { Separator } from '../components/shared/Separator';
 import { useLogin } from '../hooks/auth/useLogin';
 import { useGlobalStore } from '../store/global.store'
 import { IoAnalytics } from "react-icons/io5";
+import { useUserStore } from '../store/useUserStore';
+import { useNavigate } from 'react-router-dom';
+import { SpinnerLoading } from '../components/shared/SpinnerLoading';
 
 export const Login = () => {
 
   const {changeTheme} = useGlobalStore()
+  const {session, isLoading} = useUserStore()
+
+  const navigate = useNavigate()
 
   const {mutate, isPending} = useLogin()
 
   const {register, handleSubmit, formState: {errors}} = useForm()
 
   const onSubmit = data => {
-        
-        const dataUser = {
-            userName: data.userName,
-            farmName: data.farmName,
-            email: data.email,
-            password: data.password,
-            
-        }
 
-        mutate({dataUser})
+    const dataUser = {
+      email: data.email,
+      password: data.password, 
     }
 
-  if(isPending) return <h1 className='text-xl'>Cargando...</h1>
+    mutate({dataUser})
+  }
+
+  if(session) {
+    navigate('/')
+  }
 
   return (
     <>
       <div className="w-full h-dvh flex">
-        <div className="w-[90%] relative hidden md:block">
+        <section className="w-[90%] relative hidden md:block">
           <div className='absolute top-0 left-0 bg-radial from-[#37963b]/55 dark:from-[#22365c]/50 to-[#051306] dark:to-[#04080f] w-full h-full p-10 flex flex-col justify-between'>
             <div className='flex flex-col space-y-5'>
               <h1 className='text-white text-4xl font-bold'>EggoFarm App</h1>
@@ -53,19 +58,23 @@ export const Login = () => {
             </div>
           </div>
           <img src={imgLogin} alt="" className='w-full h-dvh filter bg-theme-text-green' />
-        </div>
+        </section>
 
-        <div className="w-full bg-theme-primary dark:bg-theme-primary-dark py-15 px-5 md:p-5 flex flex-col  md:justify-center">
-          <div className='md:px-10 flex flex-col'>
-            <LogoGreen />
-            <h2 className='text-black dark:text-white text-center md:text-start text-3xl font-medium'>Bienvenido de nuevo</h2>
-            <span className='my-3 text-base md:text-sm text-center md:text-start text-gray-900 dark:text-white mb-5 md:mb-0'>Inicia sesión para gestionar tus lotes de aves de corral y tu inventario.</span>
+        <section className="w-full bg-theme-primary dark:bg-theme-primary-dark py-15 px-5 md:p-5 flex flex-col  md:justify-center">
+          {
+            isLoading || isPending 
+            ? <SpinnerLoading loading={isLoading || isPending } />
+            : <div className='md:px-10 flex flex-col'>
+              <LogoGreen />
+              <h2 className='text-black dark:text-white text-center md:text-start text-3xl font-medium'>Bienvenido de nuevo</h2>
+              <span className='my-3 text-base md:text-sm text-center md:text-start text-gray-900 dark:text-white mb-5 md:mb-0'>Inicia sesión para gestionar tus lotes de aves de corral y tu inventario.</span>
 
-            <Separator />
+              <Separator />
 
-            <FormLogin handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />
-          </div>
-        </div>
+              <FormLogin handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />
+            </div> 
+          }
+        </section>
       </div>
     </>
   )

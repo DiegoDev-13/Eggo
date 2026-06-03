@@ -11,23 +11,23 @@ export const FormLogin = ({handleSubmit, onSubmit, register}) => {
     const navigate = useNavigate()
 
   return (
-    <form onSubmit={handleSubmit()} className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col my-8 md:my-0 space-y-5 justify-center">
         <div className="flex flex-col space-y-2">
-            <label htmlFor="" className="text-base md:text-sm dark:text-white">Correo electrónico</label>
+            <label htmlFor="register" className="text-base md:text-sm dark:text-white">Correo electrónico</label>
             <div className="flex items-center w-full bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600">
                 <MdOutlineEmail size={23} className="dark:text-white" />
-                <input type="text" placeholder="name@company.com" className="p-2 outline-none w-full dark:text-white" />
+                <input type="text" placeholder="name@company.com" id="email" {...register('email')} className="p-2 outline-none w-full dark:text-white" />
             </div>
         </div>
 
         <div className="flex flex-col space-y-2">
             <div className="flex justify-between">
-                <label htmlFor="" className="text-base md:text-sm dark:text-white">Contraseña</label>
+                <label htmlFor="password" className="text-base md:text-sm dark:text-white">Contraseña</label>
                 <span className="text-base md:text-sm text-primary-green dark:text-green-500 font-medium cursor-pointer">Has olvidado tu contraseña?</span>
             </div>
             <div className="flex items-center w-full bg-white dark:bg-theme-secondary-dark h-14 md:h-11 p-3 rounded-md border border-gray-300 dark:border-gray-600">
                 <MdLockOutline size={23} className="dark:text-white" />
-                <input type={showPassword ? 'text' : 'password'} placeholder="password" className="p-2 outline-none w-full dark:text-white" />
+                <input type={showPassword ? 'text' : 'password'} placeholder="password" id="password" {...register('password')} className="p-2 outline-none w-full dark:text-white" autoComplete="off" />
                 {
                     showPassword ? <IoEyeOffOutline size={23} className="cursor-pointer dark:text-white" onClick={() => setShowPassword(!showPassword)} /> : <IoEyeOutline size={23} className="cursor-pointer dark:text-white" onClick={() => setShowPassword(!showPassword)}/>
                 }

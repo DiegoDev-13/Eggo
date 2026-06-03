@@ -10,7 +10,7 @@ export const singUp = async ({dataUser}) => {
 
         if(error) {
             console.log(error.message)
-            throw new Error(error.message);
+            throw new Error("Error al intentar registrar usuario");
         }
 
         const userId = data.user?.id
@@ -43,7 +43,7 @@ export const singUp = async ({dataUser}) => {
 
         if(errorData) {
             console.log(errorData)
-            throw new Error(errorData.message);   
+            throw new Error("Error al dar intentar guardar datos de usuario");   
         }   
 
 
@@ -59,10 +59,13 @@ export const singIn = async ({dataUser}) => {
             email: dataUser.email,
             password: dataUser.password
         })
+
+        if(error) {
+            throw new Error("Correo o contraseña incorrecta");
+        }
         
     } catch (error) {
-        console.log(error)
-        throw new Error("Error al iniciar sesion");
+        throw new Error("Correo o contraseña incorrecta");
         
     }
 }

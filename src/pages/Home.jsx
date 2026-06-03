@@ -1,3 +1,4 @@
+import { SpinnerLoading } from "../components/shared/SpinnerLoading"
 import { useLogOut } from "../hooks/auth/useLogOut"
 
 
@@ -9,7 +10,7 @@ export const Home = () => {
         mutate()
     }
 
-    if(isPending) return <h1>Cargando..</h1>
+    if(isPending) return <SpinnerLoading loading={isPending} />
 
   return (
     <>

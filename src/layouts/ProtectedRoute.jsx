@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import { supabase } from "../supabase/supabase.config"
+import { SpinnerStart } from "../components/shared/SpinnerStart"
 
 export const ProtectedRoute = () => {
     const [session, setSession] = useState(null)
@@ -22,7 +23,7 @@ export const ProtectedRoute = () => {
         return () => subscription.unsubscribe();
     }, [])
     
-    if (loading) return <h1>Cargando...</h1>
+    if (loading) return <SpinnerStart loading={loading} /> 
 
     if (!session) return <Navigate to='/login' replace />
 

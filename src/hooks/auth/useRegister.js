@@ -1,6 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {useNavigate} from "react-router-dom"
 import { singUp } from "../../actions/auth"
+import Swal from "sweetalert2"
 
 export const useRegister = () => {
 
@@ -11,11 +12,15 @@ export const useRegister = () => {
         mutationFn: singUp,
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['user']})
-            console.log('usuario registrado')
             navigate('/')
         },
         onError: (err) => {
-            alert(err.message, 'Error al registrar')
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: err.message,
+                confirmButtonColor: '#2E7D32'
+            });
         }
     })
 

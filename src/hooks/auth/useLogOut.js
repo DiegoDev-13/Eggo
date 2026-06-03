@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { singOut } from "../../actions/auth"
 import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
 
 export const useLogOut = () => {
 
@@ -15,7 +16,12 @@ export const useLogOut = () => {
             navigate('/login', {replace: true})
         },
         onError: (err) => {
-            throw new Error(err.message);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: err.message,
+                confirmButtonColor: '#2E7D32'
+            });
         }
     })
 
