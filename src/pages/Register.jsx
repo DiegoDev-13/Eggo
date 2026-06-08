@@ -43,8 +43,6 @@ export const Register = () => {
     navigate('/')
   }
 
-  // if(isLoading) return 
-
   return (
     <>
       <div className="w-full h-full flex">

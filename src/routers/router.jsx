@@ -4,6 +4,7 @@ import { Home } from '../pages/Home'
 import { RootLayout } from '../layouts/RootLayout'
 import { Register } from '../pages/Register'
 import { ProtectedRoute } from '../layouts/ProtectedRoute'
+import { Produccion } from '../pages/Produccion'
 
 export const MyRouters = () => {
   return (
@@ -15,6 +16,7 @@ export const MyRouters = () => {
               
             <Route element={<ProtectedRoute/>}>
               <Route index element={<Home />} />
+              <Route path='/produccion' element={<Produccion />} />
             </Route>
 
         </Route>

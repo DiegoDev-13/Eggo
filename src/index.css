@@ -37,3 +37,19 @@
   color: /*info*/ #3B82F6;
   color: /*Beige*/ #F5F1E8;
 }
+
+.animacion-logo {
+  animation: logo 1.8s infinite ease-in-out forwards;
+}
+
+@keyframes logo {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(15%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

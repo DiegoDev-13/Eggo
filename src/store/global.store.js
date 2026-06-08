@@ -16,4 +16,7 @@ export const useGlobalStore = create((set, get) => ({
         
         set({ darkMode: nextMode });
     },
+
+    openSidebar: true,
+    setOpenSidebar: (state) => (set({openSidebar: state})) 
 }))
