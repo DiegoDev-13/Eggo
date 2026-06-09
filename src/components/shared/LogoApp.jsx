@@ -13,8 +13,8 @@ export const LogoApp = () => {
         </div>
         {
             openSidebar && <div className="flex flex-col justify-center items-center">
-                            <h2 className="text-white font-semibold text-2xl">Eggo App</h2>
-                            <span className="text-gray-400 font-semibold text-sm text-center">Gestión Avícola</span>
+                            <h2 className="text-white dark:text-green-600 font-semibold text-2xl">Eggo App</h2>
+                            <span className="text-gray-400 dark:text-gray-300 font-semibold text-sm text-center">Gestión Avícola</span>
                         </div>
         }
     </div>
