@@ -31,7 +31,7 @@ export const RootLayout = () => {
               ? <>
                 <Sidebar mutate={mutate} />
 
-                <div className={`container m-5 mt-7 flex-1 ml-25 transition-all duration-300 ${openSidebar ? 'md:ml-60 lg:ml-67.5' : 'w-25'}`}>
+                <div className={`container flex-1 ml-20 transition-all duration-300 ${openSidebar ? 'md:ml-60 lg:ml-62' : 'w-25'}`}>
                   <Outlet />
                 </div>
               </>
