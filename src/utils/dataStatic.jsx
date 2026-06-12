@@ -1,7 +1,7 @@
 import { BiCategoryAlt } from "react-icons/bi";
-import { MdOutlineAnalytics, MdOutlineEgg } from "react-icons/md";
+import { MdOutlineAnalytics, MdOutlineEgg, MdOutlineInventory2 } from "react-icons/md";
 import { PiMoney, PiNut } from "react-icons/pi";
-import { RiStore3Line } from "react-icons/ri";
+import { GrDatabase } from "react-icons/gr";
 
 //data SIDEBAR
 export const LinksArray = [
@@ -11,13 +11,18 @@ export const LinksArray = [
     to: "/",
   },
   {
+    label: "Lotes",
+    icon: <MdOutlineInventory2 size={22} />,
+    to: "/lotes",
+  },
+  {
     label: "Producción",
     icon: <MdOutlineEgg size={22} />,
     to: "/produccion",
   },
   {
     label: "Inventario",
-    icon: <RiStore3Line size={22} />,
+    icon: <GrDatabase size={18} />,
     to: "/inventario",
   },
   {
@@ -31,9 +36,9 @@ export const LinksArray = [
     to: "/reportes",
   },
   {
-    label: "Ajustes",
-    icon: <PiNut />,
-    to: "/ajustes",
+    label: "Configuracion",
+    icon: <PiNut size={22} />,
+    to: "/configuracion",
   },
 ];
 

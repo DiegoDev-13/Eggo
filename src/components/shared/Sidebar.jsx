@@ -17,17 +17,17 @@ export const Sidebar = ({mutate}) => {
     }
 
   return (
-    <div className={`bg-primaryDark-green dark:bg-theme-primary-dark px-4 py-6 fixed h-full w-20 ${openSidebar ? 'md:w-55 lg:w-62.5' : 'w-20'} transition-all duration-300 flex flex-col`}>
+    <div className={`bg-primaryDark-green dark:bg-theme-primary-dark px-4 py-6 fixed h-full w-20 ${openSidebar ? 'md:w-55 lg:w-62.5' : 'w-20'} transition-all duration-300 flex flex-col border-r border-theme-textLight`}>
         <LogoApp />
 
         <BtnCloseSiderbar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
 
-        <nav className="h-full flex flex-col justify-between py-8 space-y-2.5 ">
+        <nav className="h-full flex flex-col justify-between pt-8 space-y-2.5 ">
             
             <div className="flex flex-col space-y-2">
                 {
                     LinksArray.map((link,index) => (
-                        <NavLink key={index} to={link.to} className={({isActive}) => `${isActive ? 'text-black dark:text-green-500 bg-amber-400 dark:bg-green-500/20 p-2.5 rounded-lg border-l-3 border-amber-700 dark:border-green-500' : 'text-white p-2.5 hover:bg-amber-400/50 hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
+                        <NavLink key={index} to={link.to} className={({isActive}) => `${isActive ? 'text-black dark:text-green-500 bg-amber-500 dark:bg-green-500/20 p-2.5 rounded-lg border-l-4 border-amber-700 dark:border-green-500' : 'text-white p-2.5 hover:bg-amber-500/50 hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
                             {link.icon} 
                             {
                                 openSidebar && <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >{link.label}</span>
@@ -37,9 +37,15 @@ export const Sidebar = ({mutate}) => {
                 }
             </div>
 
-            <div className="flex flex-col">
+            <nav className="flex flex-col">
+                {/* <NavLink to="lotes" className={({isActive}) => `${isActive ? 'text-black bg-amber-500 p-2.5 rounded-lg border-l-3 border-amber-700' : 'text-white p-2.5 hover:bg-amber-500/50 rounded-lg hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
+                    <IoMdAddCircleOutline size={22} />
+                    {
+                        openSidebar && <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Lotes</span>
+                    }
+                </NavLink> */}
                 <Separator />
-                <NavLink to="centro-de-ayuda" className={({isActive}) => `${isActive ? 'text-black bg-amber-400 p-2.5 rounded-lg border-l-3 border-amber-700' : 'text-white p-2.5 hover:bg-amber-400/50 hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
+                <NavLink to="centro-de-ayuda" className={({isActive}) => `${isActive ? 'text-black bg-amber-500 p-2.5 rounded-lg border-l-3 border-amber-700' : 'text-white p-2.5 hover:bg-amber-500/50 hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
                     <IoIosHelpCircleOutline size={22} />
                     {
                         openSidebar && <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Centro de Ayuda</span>
@@ -51,7 +57,7 @@ export const Sidebar = ({mutate}) => {
                         openSidebar && <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Cerrar Sesion</span>
                     }
                 </button>
-            </div>
+            </nav>
         </nav>
     </div>
   )
