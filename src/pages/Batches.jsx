@@ -3,6 +3,38 @@ import { FiDownload } from "react-icons/fi";
 import { IoIosAdd } from "react-icons/io";
 import { BatchesMetricCards } from "../components/batches/BatchesMetricCards";
 import { IoCalendarClearOutline } from "react-icons/io5";
+import { ContainerCardBatches } from "../components/batches/ContainerCardBatches";
+
+
+const dataBatches = [
+    {
+        id: 1,
+        active: true,
+        race: 'Elite White Leghorns',
+        hen_count: 300,
+        current_age: 42,
+        production: 94.2,
+        mortality: 0.31,
+    },
+    {
+        id: 2,
+        active: false,
+        race: 'ISA Brown Units',
+        hen_count: 500,
+        current_age: 58,
+        production: 85.5,
+        mortality: 0.68,
+    },
+    {
+        id: 3,
+        active: true,
+        race: 'Premiun Lohmann',
+        hen_count: 850,
+        current_age: 22,
+        production: 89.4,
+        mortality: 0.12,
+    },
+]
 
 export const Batches = () => {
 
@@ -44,6 +76,10 @@ export const Batches = () => {
             </div>
 
             <BatchesMetricCards />
+        </section>
+
+        <section className="px-7 py-8 flex flex-col space-y-8">
+            <ContainerCardBatches dataBatches={dataBatches} />
         </section>
     </div>
   )

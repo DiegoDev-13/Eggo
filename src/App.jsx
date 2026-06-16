@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MyRouters } from './routers/router'
+import {styled, ThemeProvider} from 'styled-components'
 
 function App() {
   const [count, setCount] = useState(0)
