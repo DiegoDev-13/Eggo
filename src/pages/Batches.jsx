@@ -4,6 +4,9 @@ import { IoIosAdd } from "react-icons/io";
 import { BatchesMetricCards } from "../components/batches/BatchesMetricCards";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { ContainerCardBatches } from "../components/batches/ContainerCardBatches";
+import {dateNow} from '../helpers/index'
+import { useState } from "react";
+import { ModalAddBatche } from "../components/shared/ModalAddBatche";
 
 
 const dataBatches = [
@@ -38,19 +41,19 @@ const dataBatches = [
 
 export const Batches = () => {
 
-    const fecha = new Date();
+    const [activeModalAddBatche, setActiveModalAddBatche] = useState(false)
 
-    const formateador = new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: '2-digit',
-    year: 'numeric'
-    });
-
-    const fechaFormateada = formateador.format(fecha).toLowerCase().replace('.', '');
-    console.log(fechaFormateada);
+    const date = dateNow()
 
   return (
-    <div className="dark:bg-theme-secondary-dark">
+    <div className="dark:bg-theme-secondary-dark relative">
+
+        {
+            activeModalAddBatche && <ModalAddBatche activeModalAddBatche={activeModalAddBatche} setActiveModalAddBatche={setActiveModalAddBatche} />
+        }
+
+        
+
         <AppBar />
 
         <section className="px-7 py-8 flex flex-col space-y-8">
@@ -60,7 +63,7 @@ export const Batches = () => {
                     {/* <span className="text-center md:text-start text-theme-textLight dark:text-gray-300">Overview and lifecycle tracking for poultry flock units.</span> */}
                     <span className="text-center md:text-start text-gray-700 dark:text-gray-300 flex items-center gap-2">
                         <IoCalendarClearOutline size={18} />
-                        {fechaFormateada}
+                        {date}
                     </span>
                 </div>
                 <div className="flex items-center gap-4">
@@ -68,7 +71,7 @@ export const Batches = () => {
                         <FiDownload size={16} />
                         Export
                     </button>
-                    <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white border border-black dark:border-none px-3 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-300">
+                    <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white border border-black dark:border-none px-3 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-300" onClick={() => setActiveModalAddBatche(!activeModalAddBatche)}>
                         <IoIosAdd size={22} />
                         Add New Batch
                     </button>

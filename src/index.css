@@ -17,6 +17,7 @@
   --color-theme-text-withe-secondary: #f1f1f1;
   --color-theme-text: #1F2937;
   --color-theme-textLight: #6B7280;
+  --color-theme-info: #3B82F6;
 }
 
 .colors {
@@ -47,6 +48,10 @@
   animation: logo 1.8s infinite ease-in-out forwards;
 }
 
+.sideScale {
+  animation: animationSideScale 0.3s ease;
+}
+
 @keyframes logo {
   0% {
     transform: translateY(0);
@@ -56,5 +61,15 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+
+@keyframes animationSideScale {
+  0% { 
+    scale: 50%;
+  }
+  100% { 
+    scale: 100%;
   }
 }

@@ -7,7 +7,7 @@ export const ContainerCardBatches = ({dataBatches}) => {
 
         {
             dataBatches.map((item, index) => (
-                <CardBatches key={index} data={item}  />
+                <CardBatches key={index} data={item} index={index}  />
             ))
         }
     </div>
