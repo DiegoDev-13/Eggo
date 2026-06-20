@@ -1,35 +1,38 @@
-import { IoMdClose, IoMdMore } from "react-icons/io"
+import { IoMdMore } from "react-icons/io"
 import { Separator } from "../shared/Separator"
 import { ProgressBar } from "../shared/ProgressBar"
 import { useState } from "react"
-import { FaRegEdit } from "react-icons/fa";
+import { MoreOptionsCardBatches } from "./MoreOptionsCardBatches";
 
-export const CardBatches = ({data, index}) => {
+export const CardBatches = ({data, index, activeBatchId, setActiveBatchId}) => {
 
-    const [activeMoreOptions, setActiveMoreOptions] = useState(false)
+    const isOpen = activeBatchId === data.id;
+
+    const handleToggleOptions = () => {
+        if (isOpen) {
+            // Si ya está abierta y hacen clic, la cerramos
+            setActiveBatchId(null);
+        } else {
+            // Si está cerrada, abrimos esta y automáticamente cierra las demás
+            setActiveBatchId(data.id);
+        }
+    };
+
+    // const [activeMoreOptions, setActiveMoreOptions] = useState(false)
 
   return (
     <div className="w-70 border border-gray-700 dark:bg-theme-third-dark dark:border-gray-600 rounded-lg p-5 relative">
-        <button className="cursor-pointer absolute top-6 right-5" onClick={() => setActiveMoreOptions(!activeMoreOptions)}>
+        <button className="cursor-pointer absolute top-6 right-5" onClick={() => setActiveBatchId(data.id)}>
             <IoMdMore size={25} className="dark:text-gray-300 hover:scale-120 transition-all duration-200" />
         </button>
 
         {
-            activeMoreOptions && <div className="absolute top-14 -right-22 bg-white dark:bg-theme-third-dark dark:border-gray-500 w-35 z-10 px-4 py-8 flex flex-col justify-center space-y-4 border border-gray-700 rounded-lg">
-
-                        <button type="button" className="absolute top-2 right-2 cursor-pointer" onClick={() => setActiveMoreOptions(false)}>
-                            <IoMdClose size={18} className="dark:text-gray-100 dark:hover:text-gray-400 hover:scale-120 transition-all duration-300" />
-                        </button>
-
-                        <button type="button" className="flex items-center gap-2 cursor-pointer bg-blue-500 px-2 py-0.5 rounded-lg text-white font-semibold hover:scale-105 transition-all duration-200">
-                            <FaRegEdit size={18} />
-                            Editar
-                        </button>
-                        <button type="button" className="flex items-center gap-2 cursor-pointer bg-red-500 px-2 py-0.5 rounded-lg text-white font-semibold hover:scale-105 transition-all duration-200">
-                            <FaRegEdit size={18} />
-                            Eliminar
-                        </button>
-                    </div>
+            isOpen && (
+                <MoreOptionsCardBatches 
+                    // Pasamos una función que setea null para que el botón "X" de cerrar funcione
+                    setActiveBatchId={setActiveBatchId} 
+                />
+            )
         }
 
         <div className="">

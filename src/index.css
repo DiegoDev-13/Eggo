@@ -52,6 +52,10 @@
   animation: animationSideScale 0.3s ease;
 }
 
+.sideScaleFast {
+  animation: animationSideScale 0.2s ease;
+}
+
 @keyframes logo {
   0% {
     transform: translateY(0);

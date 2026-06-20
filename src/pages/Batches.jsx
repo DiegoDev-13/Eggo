@@ -7,6 +7,7 @@ import { ContainerCardBatches } from "../components/batches/ContainerCardBatches
 import {dateNow} from '../helpers/index'
 import { useState } from "react";
 import { ModalAddBatche } from "../components/shared/ModalAddBatche";
+import { useGlobalStore } from "../store/global.store";
 
 
 const dataBatches = [
@@ -41,7 +42,7 @@ const dataBatches = [
 
 export const Batches = () => {
 
-    const [activeModalAddBatche, setActiveModalAddBatche] = useState(false)
+    const {activeModalAddBatche, setActiveModalAddBatche} = useGlobalStore()
 
     const date = dateNow()
 

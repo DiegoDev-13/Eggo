@@ -18,5 +18,9 @@ export const useGlobalStore = create((set, get) => ({
     },
 
     openSidebar: true,
-    setOpenSidebar: (state) => (set({openSidebar: state})) 
+    setOpenSidebar: (state) => (set({openSidebar: state})) ,
+
+    //State Modal add Batche
+    activeModalAddBatche: false,
+    setActiveModalAddBatche: (state) => (set({activeModalAddBatche: state}))
 }))
