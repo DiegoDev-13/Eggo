@@ -1,14 +1,9 @@
-import { MoonLoader } from "react-spinners";
+import {  ImSpinner8 } from "react-icons/im";
 
-export const SpinnerLoading = ({loading}) => {
+export const SpinnerLoading = ({}) => {
   return (
-    <div className="w-full h-dvh flex justify-center items-center">
-        <MoonLoader 
-            color={'#2E7D32'}
-            loading={loading}
-            // cssOverride={override}
-            size={70}
-        />
+    <div className="w-full h-full flex justify-center items-center">
+        <ImSpinner8 className=" animate-spin text-primary-green dark:text-green-500" size={85} />
     </div>
   )
 }

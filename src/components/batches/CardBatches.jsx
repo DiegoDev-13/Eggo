@@ -1,10 +1,10 @@
 import { IoMdMore } from "react-icons/io"
 import { Separator } from "../shared/Separator"
 import { ProgressBar } from "../shared/ProgressBar"
-import { useState } from "react"
 import { MoreOptionsCardBatches } from "./MoreOptionsCardBatches";
+import Swal from "sweetalert2"
 
-export const CardBatches = ({data, index, activeBatchId, setActiveBatchId}) => {
+export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete}) => {
 
     const isOpen = activeBatchId === data.id;
 
@@ -18,8 +18,6 @@ export const CardBatches = ({data, index, activeBatchId, setActiveBatchId}) => {
         }
     };
 
-    // const [activeMoreOptions, setActiveMoreOptions] = useState(false)
-
   return (
     <div className="w-70 border border-gray-700 dark:bg-theme-third-dark dark:border-gray-600 rounded-lg p-5 relative">
         <button className="cursor-pointer absolute top-6 right-5" onClick={() => setActiveBatchId(data.id)}>
@@ -31,6 +29,7 @@ export const CardBatches = ({data, index, activeBatchId, setActiveBatchId}) => {
                 <MoreOptionsCardBatches 
                     // Pasamos una función que setea null para que el botón "X" de cerrar funcione
                     setActiveBatchId={setActiveBatchId} 
+                    handleDelete={handleDelete}
                 />
             )
         }
@@ -40,13 +39,13 @@ export const CardBatches = ({data, index, activeBatchId, setActiveBatchId}) => {
             <span className="dark:text-white">Batch {data.id}</span>
         </div>
 
-        <h3 className="text-base my-1 dark:text-gray-200">{data.race}</h3>
+        <h3 className="text-base my-1 dark:text-gray-200 line-clamp-1">{data.genetic_line}</h3>
 
         <div className="py-3 flex flex-col space-y-4">
             <div className="flex justify-between">
                 <div className="flex flex-col space-y-1">
                     <span className="text-xs uppercase font-medium dark:text-gray-400">Hen Count</span>
-                    <span className="text-lg font-semibold dark:text-white">{data.hen_count} birds</span>
+                    <span className="text-lg font-semibold dark:text-white">{data.current_quantity} birds</span>
                 </div>
                 <div className="flex flex-col space-y-1">
                     <span className="text-xs uppercase font-medium dark:text-gray-400">Current Age</span>

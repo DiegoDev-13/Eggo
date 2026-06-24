@@ -8,6 +8,9 @@ import {dateNow} from '../helpers/index'
 import { useState } from "react";
 import { ModalAddBatche } from "../components/shared/ModalAddBatche";
 import { useGlobalStore } from "../store/global.store";
+import { useUserStore } from "../store/useUserStore";
+import { useGetBatches } from "../hooks/batches/useGetBatches";
+import { SpinnerLoading } from "../components/shared/SpinnerLoading";
 
 
 const dataBatches = [
@@ -43,8 +46,14 @@ const dataBatches = [
 export const Batches = () => {
 
     const {activeModalAddBatche, setActiveModalAddBatche} = useGlobalStore()
+    const {user, userData, isLoading} = useUserStore()
 
     const date = dateNow()
+
+    const {data, isLoading: isLoadingBatches, isError} = useGetBatches(userData.user_id)
+
+
+    if(isLoadingBatches || isLoading) return <SpinnerLoading />
 
   return (
     <div className="dark:bg-theme-secondary-dark relative">
@@ -55,7 +64,7 @@ export const Batches = () => {
 
         
 
-        <AppBar />
+        <AppBar userData={userData} />
 
         <section className="px-7 py-8 flex flex-col space-y-8">
             <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3">
@@ -83,7 +92,7 @@ export const Batches = () => {
         </section>
 
         <section className="px-7 py-8 flex flex-col space-y-8">
-            <ContainerCardBatches dataBatches={dataBatches} />
+            <ContainerCardBatches dataBatches={data} />
         </section>
     </div>
   )

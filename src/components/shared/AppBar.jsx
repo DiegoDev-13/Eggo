@@ -1,11 +1,10 @@
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
 import { UserCardBar } from "./userCardBar";
-import { useUserStore } from "../../store/useUserStore";
 
-export const AppBar = () => {
+export const AppBar = ({userData}) => {
 
-    const {user, userData, isLoading} = useUserStore()
+    // const {user, userData, isLoading} = useUserStore()
 
   return (
     <div className="dark:bg-theme-primary-dark px-3 md:px-6 md:py-2 border-b border-stone-500 dark:border-theme-textLight w-full flex">
