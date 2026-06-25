@@ -11,6 +11,8 @@ import { useGlobalStore } from "../store/global.store";
 import { useUserStore } from "../store/useUserStore";
 import { useGetBatches } from "../hooks/batches/useGetBatches";
 import { SpinnerLoading } from "../components/shared/SpinnerLoading";
+import { LottieAnimation } from "../components/shared/LottieAnimation";
+import vacioLottie from '../assets/vacioLottie.json'
 
 
 const dataBatches = [
@@ -51,6 +53,8 @@ export const Batches = () => {
     const date = dateNow()
 
     const {data, isLoading: isLoadingBatches, isError} = useGetBatches(userData.user_id)
+    
+    console.log(data)
 
 
     if(isLoadingBatches || isLoading) return <SpinnerLoading />
@@ -66,7 +70,7 @@ export const Batches = () => {
 
         <AppBar userData={userData} />
 
-        <section className="px-7 py-8 flex flex-col space-y-8">
+        <section className="px-7 pt-8 flex flex-col space-y-8">
             <div className="flex flex-col md:flex-row justify-center md:justify-between items-center space-y-3">
                 <div className="flex flex-col space-y-1">
                     <span className="text-center md:text-start font-semibold dark:text-white text-3xl">Panel Administrador - Lotes</span>
@@ -88,12 +92,30 @@ export const Batches = () => {
                 </div>
             </div>
 
-            <BatchesMetricCards />
         </section>
 
         <section className="px-7 py-8 flex flex-col space-y-8">
-            <ContainerCardBatches dataBatches={data} />
+
+            {
+                data?.length > 0 
+                    ?  <>
+                        <BatchesMetricCards />
+                        <ContainerCardBatches dataBatches={data} />
+                    </>
+                    :   <section className="px-7 flex flex-col">
+                        <LottieAnimation width={380} height={380} animation={vacioLottie} />
+                        <h2 className="text-center text-2xl font-semibold">Ups... ¡No tiene ningún lote registrado!</h2>
+                    </section>
+
+            }
+
+            {/* <BatchesMetricCards />
+            <ContainerCardBatches dataBatches={data} /> */}
         </section>
+
+        {/* <section className="px-7 py-8 flex flex-col space-y-8">
+            <LottieAnimation width={400} height={400} animation={vacioLottie} />
+        </section> */}
     </div>
   )
 }
