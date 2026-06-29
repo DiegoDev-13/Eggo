@@ -56,6 +56,10 @@
   animation: animationSideScale 0.2s ease;
 }
 
+.animated-sideRight {
+  animation: animationSideRight 0.4s ease-in-out forwards;
+}
+
 @keyframes logo {
   0% {
     transform: translateY(0);
@@ -76,4 +80,15 @@
   100% { 
     scale: 100%;
   }
+}
+
+@keyframes animationSideRight {
+    0% {
+        transform: translateX(10%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

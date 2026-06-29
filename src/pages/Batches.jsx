@@ -6,7 +6,6 @@ import { IoCalendarClearOutline } from "react-icons/io5";
 import { ContainerCardBatches } from "../components/batches/ContainerCardBatches";
 import {dateNow} from '../helpers/index'
 import { useState } from "react";
-import { ModalAddBatche } from "../components/shared/ModalAddBatche";
 import { useGlobalStore } from "../store/global.store";
 import { useUserStore } from "../store/useUserStore";
 import { useGetBatches } from "../hooks/batches/useGetBatches";
@@ -53,20 +52,11 @@ export const Batches = () => {
     const date = dateNow()
 
     const {data, isLoading: isLoadingBatches, isError} = useGetBatches(userData.user_id)
-    
-    console.log(data)
-
 
     if(isLoadingBatches || isLoading) return <SpinnerLoading />
 
   return (
     <div className="dark:bg-theme-secondary-dark relative">
-
-        {
-            activeModalAddBatche && <ModalAddBatche activeModalAddBatche={activeModalAddBatche} setActiveModalAddBatche={setActiveModalAddBatche} />
-        }
-
-        
 
         <AppBar userData={userData} />
 
@@ -109,13 +99,8 @@ export const Batches = () => {
 
             }
 
-            {/* <BatchesMetricCards />
-            <ContainerCardBatches dataBatches={data} /> */}
         </section>
 
-        {/* <section className="px-7 py-8 flex flex-col space-y-8">
-            <LottieAnimation width={400} height={400} animation={vacioLottie} />
-        </section> */}
     </div>
   )
 }

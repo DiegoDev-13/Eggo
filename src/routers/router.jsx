@@ -7,6 +7,7 @@ import { ProtectedRoute } from '../layouts/ProtectedRoute'
 import { Produccion } from '../pages/Produccion'
 import { Configuracion } from '../pages/Configuracion'
 import { Batches } from '../pages/Batches'
+import { Reports } from '../pages/Reports'
 
 export const MyRouters = () => {
   return (
@@ -20,6 +21,7 @@ export const MyRouters = () => {
               <Route index element={<Home />} />
               <Route path='/lotes' element={<Batches />} />
               <Route path='/produccion' element={<Produccion />} />
+              <Route path='/reportes' element={<Reports />} />
               <Route path='/configuracion' element={<Configuracion />} />
             </Route>
 

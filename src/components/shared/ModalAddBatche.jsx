@@ -60,7 +60,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
 
 
     return (
-        <div className="w-full h-screen absolute top-0 left-0 inset-0 bg-black/50  backdrop-blur-[2px] flex justify-center items-center z-50" onClick={handleClose}>
+        <div className="w-full h-screen fixed top-0 left-0 inset-0 bg-black/50  backdrop-blur-[2px] flex justify-center items-center z-50" onClick={handleClose}>
             
             {
                 isPending 

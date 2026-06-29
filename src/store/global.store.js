@@ -22,5 +22,11 @@ export const useGlobalStore = create((set, get) => ({
 
     //State Modal add Batche
     activeModalAddBatche: false,
-    setActiveModalAddBatche: (state) => (set({activeModalAddBatche: state}))
+    setActiveModalAddBatche: (state) => (set({activeModalAddBatche: state})),
+
+    //State Modal details Batche
+    batcheDetails: null,
+    setBatcheDetails: (state) => (set({batcheDetails: state})),
+    activeModalDatailsBatche: false,
+    setActiveModalDatailsBatche: (state) => (set({activeModalDatailsBatche: state})),
 }))

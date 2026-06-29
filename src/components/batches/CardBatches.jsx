@@ -3,10 +3,13 @@ import { Separator } from "../shared/Separator"
 import { ProgressBar } from "../shared/ProgressBar"
 import { MoreOptionsCardBatches } from "./MoreOptionsCardBatches";
 import Swal from "sweetalert2"
+import { useGlobalStore } from "../../store/global.store";
 
 export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete}) => {
 
     const isOpen = activeBatchId === data.id;
+
+    const {setActiveModalDatailsBatche, setBatcheDetails} = useGlobalStore() 
 
     const handleToggleOptions = () => {
         if (isOpen) {
@@ -17,6 +20,12 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
             setActiveBatchId(data.id);
         }
     };
+
+    const handleDetails = () => {
+        console.log(`El id del lote es ${data.id}`)
+        setBatcheDetails(data)
+        setActiveModalDatailsBatche(true)
+    }
 
   return (
     <div className="w-70 border border-gray-700 dark:bg-theme-third-dark dark:border-gray-600 rounded-lg p-5 relative">
@@ -70,7 +79,7 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
         <Separator />
 
         <div className="flex justify-around items-center mt-5">
-            <button className="px-5 py-1.5 border border-green-600 text-green-700 hover:bg-green-700/10 dark:border-green-500 dark:text-green-500 dark:hover:bg-green-500/10 cursor-pointer rounded-lg transition-all duration-300">
+            <button className="px-5 py-1.5 border border-green-600 text-green-700 hover:bg-green-700/10 dark:border-green-500 dark:text-green-500 dark:hover:bg-green-500/10 cursor-pointer rounded-lg transition-all duration-300" onClick={handleDetails}>
                 Details
             </button>
             <button className="px-5 py-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-800 dark:text-gray-100 cursor-pointer rounded-lg transition-all duration-300">

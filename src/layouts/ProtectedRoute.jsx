@@ -2,10 +2,15 @@ import { useEffect, useState } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import { supabase } from "../supabase/supabase.config"
 import { SpinnerStart } from "../components/shared/SpinnerStart"
+import { useGlobalStore } from "../store/global.store"
+import { ModalAddBatche } from "../components/shared/ModalAddBatche"
+import { ModalDetailsBatches } from "../components/shared/ModalDetailsBatches"
 
 export const ProtectedRoute = () => {
     const [session, setSession] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const {activeModalAddBatche, setActiveModalAddBatche, activeModalDatailsBatche, setActiveModalDatailsBatche, batcheDetails} = useGlobalStore()
 
     useEffect(() => {  
         // 1: Usamos getSession para obtener la sesión inicial
@@ -27,5 +32,17 @@ export const ProtectedRoute = () => {
 
     if (!session) return <Navigate to='/login' replace />
 
-    return <Outlet />
+    return <>
+        
+        {
+            activeModalAddBatche && <ModalAddBatche activeModalAddBatche={activeModalAddBatche} setActiveModalAddBatche={setActiveModalAddBatche} />
+        }
+
+        {
+            activeModalDatailsBatche && <ModalDetailsBatches activeModalDatailsBatche={activeModalDatailsBatche} setActiveModalDatailsBatche={setActiveModalDatailsBatche} batcheDetails={batcheDetails}  />
+        }
+
+        
+        <Outlet />
+    </>
 }
