@@ -1,6 +1,6 @@
-export const MetricCard = ({icon, title, value, trend, trendType, topBorderColor}) => {
+export const MetricCard = ({icon, title, value, trend, trendType, topBorderColor, height, width}) => {
   return (
-    <div className={`w-30 lg:w-39 h-40 lg:h-50 dark:bg-theme-third-dark flex flex-col space-y-2 border border-gray-500 dark:border-gray-600 py-10 px-5 rounded-xl border-t-4 ${topBorderColor}`}>
+    <div className={`w-30 lg:w-${width} h-40 lg:h-${height} bg-white dark:bg-theme-third-dark flex flex-col space-y-2 border border-gray-500 dark:border-gray-600 py-10 px-5 rounded-xl border-t-4 ${topBorderColor}`}>
         <div className="flex justify-between items-center ">
             {icon}
             {

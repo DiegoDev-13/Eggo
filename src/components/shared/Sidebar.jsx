@@ -38,12 +38,6 @@ export const Sidebar = ({mutate}) => {
             </div>
 
             <nav className="flex flex-col">
-                {/* <NavLink to="lotes" className={({isActive}) => `${isActive ? 'text-black bg-amber-500 p-2.5 rounded-lg border-l-3 border-amber-700' : 'text-white p-2.5 hover:bg-amber-500/50 rounded-lg hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
-                    <IoMdAddCircleOutline size={22} />
-                    {
-                        openSidebar && <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Lotes</span>
-                    }
-                </NavLink> */}
                 <Separator />
                 <NavLink to="centro-de-ayuda" className={({isActive}) => `${isActive ? 'text-black bg-amber-500 p-2.5 rounded-lg border-l-3 border-amber-700' : 'text-white p-2.5 hover:bg-amber-500/50 hover:dark:bg-green-500/10 hover:rounded-lg transition-all duration-200'} flex items-center ${openSidebar ? '' : 'justify-center'} gap-3 text-base`}>
                     <IoIosHelpCircleOutline size={22} />
