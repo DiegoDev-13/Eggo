@@ -5,6 +5,7 @@ import { FiPrinter } from "react-icons/fi";
 import { LuCirclePlus } from "react-icons/lu";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BatchesDatailsMetricCards } from "../batches/BatchesDatailsMetricCards";
+import { FarmTabsBatches } from "../batches/FarmTabsBatches";
 
 export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDatailsBatche, batcheDetails}) => {
 
@@ -70,8 +71,9 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
 
             <div className="grid grid-cols-[75%_25%] flex-1 min-h-0 overflow-hidden rounded-b-lg"> 
 
-                <div className="bg-slate-200 overflow-y-auto p-4"> 
+                <div className="bg-slate-100 overflow-y-auto py-4 px-8 flex flex-col space-y-3"> 
                     <BatchesDatailsMetricCards />
+                    <FarmTabsBatches />
                 </div> 
 
                 
