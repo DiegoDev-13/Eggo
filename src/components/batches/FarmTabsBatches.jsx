@@ -1,4 +1,7 @@
 import * as Tabs from '@radix-ui/react-tabs';
+import { TableData } from '../shared/TableData';
+
+const tableHeader = ['date & time', 'action', 'user', 'description']
 
 export const FarmTabsBatches = () => {
   return (
@@ -7,37 +10,37 @@ export const FarmTabsBatches = () => {
       <Tabs.List className="flex border-b border-gray-400 space-x-8 ">
         <Tabs.Trigger 
           value="general" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           General Info
         </Tabs.Trigger>
         <Tabs.Trigger 
           value="production" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           Production
         </Tabs.Trigger>
         <Tabs.Trigger 
           value="health" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           Health
         </Tabs.Trigger>
         <Tabs.Trigger 
           value="feeding" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           Feeding
         </Tabs.Trigger>
         <Tabs.Trigger 
           value="finance" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           Finance
         </Tabs.Trigger>
         <Tabs.Trigger 
           value="history" 
-          className="pb-3 text-sm font-medium text-gray-500 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
+          className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
         >
           History
         </Tabs.Trigger>
@@ -47,67 +50,67 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="general" className="pt-4 flex flex-col space-y-8 ">
         <div className='flex justify-between'>
             <div className='w-[55%] flex flex-col space-y-8'>
-                <div className='w-full border border-gray-400 rounded-lg bg-white'>
-                    <div className='p-3 px-6 bg-slate-200 rounded-t-lg'>
-                        <h3 className='font-medium'>Batch Identity</h3>
+                <div className='w-full border border-gray-500 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+                    <div className='p-3 px-6 bg-slate-200 dark:bg-theme-primary-dark rounded-t-lg'>
+                        <h3 className='font-medium dark:text-white'>Batch Identity</h3>
                     </div>
                     <div className='flex p-4 px-6 space-x-16'>
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Batch Name</h4>
-                                <span className='text-base font-medium'>White Leghorn A-102</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Name</h4>
+                                <span className='text-base font-medium dark:text-white'>White Leghorn A-102</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Breed</h4>
-                                <span className='text-base font-medium'>White Leghorn</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Breed</h4>
+                                <span className='text-base font-medium dark:text-white'>White Leghorn</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Barn / Unit</h4>
-                                <span className='text-base font-medium'>Unit 4</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Barn / Unit</h4>
+                                <span className='text-base font-medium dark:text-white'>Unit 4</span>
                              </div>
                         </div>
 
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Batch Code</h4>
-                                <span className='text-base font-medium'>BATCH-2026-001</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Code</h4>
+                                <span className='text-base font-medium dark:text-white'>BATCH-2026-001</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Farm / Location</h4>
-                                <span className='text-base font-medium'>Main Farm - Unit 4</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Farm / Location</h4>
+                                <span className='text-base font-medium dark:text-white'>Main Farm - Unit 4</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Supplier</h4>
-                                <span className='text-base font-medium'>Heritage Hatchery</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Supplier</h4>
+                                <span className='text-base font-medium dark:text-white'>Heritage Hatchery</span>
                              </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='w-full border border-gray-400 rounded-lg bg-white'>
-                    <div className='p-3 px-6 bg-slate-200 rounded-t-lg'>
-                        <h3 className='font-medium'>Timeline & Status</h3>
+                <div className='w-full border border-gray-500 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+                    <div className='p-3 px-6 bg-slate-200 dark:bg-theme-primary-dark rounded-t-lg'>
+                        <h3 className='font-medium dark:text-white'>Timeline & Status</h3>
                     </div>
                     <div className='flex p-4 px-6 space-x-16'>
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Arrival Date</h4>
-                                <span className='text-base font-medium'>Jan 15, 2026</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Arrival Date</h4>
+                                <span className='text-base font-medium dark:text-white'>Jan 15, 2026</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Cycle End Projection</h4>
-                                <span className='text-base font-medium'>Dec 2024</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Cycle End Projection</h4>
+                                <span className='text-base font-medium dark:text-white'>Dec 2024</span>
                              </div>
                         </div>
 
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Current Age</h4>
-                                <span className='text-base font-medium'>42 Weeks</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Current Age</h4>
+                                <span className='text-base font-medium dark:text-white'>42 Weeks</span>
                              </div>
                              <div className='flex flex-col'>
-                                <h4 className='text-sm text-black/80 font-medium'>Batch Lead</h4>
-                                <span className='text-base font-medium'>Samuel Jenkins</span>
+                                <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Lead</h4>
+                                <span className='text-base font-medium dark:text-white'>Samuel Jenkins</span>
                              </div>
                         </div>
                     </div>
@@ -120,34 +123,16 @@ export const FarmTabsBatches = () => {
         </div>
 
         <div className='flex'>
-            <div className='w-full border border-gray-400 rounded-lg bg-white'>
-                <div className='p-3 px-6 bg-slate-200 rounded-t-lg'>
-                    <h3 className='font-medium'>Recent Activity Log</h3>
+            <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
+                <div className='flex justify-between p-3 px-6 rounded-t-lg'>
+                    <h3 className='font-medium dark:text-white'>Recent Activity Log</h3>
+                    <button className='text-gray-700 dark:text-gray-400 hover:text-black hover:dark:text-white font-medium transition-all duration-300 cursor-pointer'>View All History</button>
                 </div>
-                <div className='flex p-4 px-6 space-x-16'>
-                    <div className='flex flex-col space-y-3'>
-                            <div className='flex flex-col'>
-                            <h4 className='text-sm text-black/80 font-medium'>Arrival Date</h4>
-                            <span className='text-base font-medium'>Jan 15, 2026</span>
-                            </div>
-                            <div className='flex flex-col'>
-                            <h4 className='text-sm text-black/80 font-medium'>Cycle End Projection</h4>
-                            <span className='text-base font-medium'>Dec 2024</span>
-                            </div>
-                    </div>
 
-                    <div className='flex flex-col space-y-3'>
-                            <div className='flex flex-col'>
-                            <h4 className='text-sm text-black/80 font-medium'>Current Age</h4>
-                            <span className='text-base font-medium'>42 Weeks</span>
-                            </div>
-                            <div className='flex flex-col'>
-                            <h4 className='text-sm text-black/80 font-medium'>Batch Lead</h4>
-                            <span className='text-base font-medium'>Samuel Jenkins</span>
-                            </div>
-                    </div>
-                </div>
+                <TableData tableHeader={tableHeader} />
             </div>
+
+
         </div>
       </Tabs.Content>
 
