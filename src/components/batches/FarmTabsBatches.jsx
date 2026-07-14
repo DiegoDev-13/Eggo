@@ -1,7 +1,9 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { TableData } from '../shared/TableData';
+import { TableProduction } from './TableProduction';
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
+const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
 
 export const FarmTabsBatches = () => {
   return (
@@ -14,6 +16,7 @@ export const FarmTabsBatches = () => {
         >
           General Info
         </Tabs.Trigger>
+        
         <Tabs.Trigger 
           value="production" 
           className="pb-3 text-sm font-medium text-gray-500 dark:text-gray-400 data-[state=active]:text-green-700 dark:data-[state=active]:text-green-500 dark:data-[state=active]:border-green-500 data-[state=active]:border-b-2 data-[state=active]:border-green-700 cursor-pointer"
@@ -117,8 +120,8 @@ export const FarmTabsBatches = () => {
                 </div>
                 
             </div>
-            <div className='w-[40%] h-40 border border-blue-600'>
-
+            <div className='w-[40%] h-40 rounded-lg'>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRz6bqdqzVD1CbOA8xkIMXzNQvVzllA4PYq19qlSGhr2Uogvc6EppPZcD9&s=10" alt="" className='h-112 w-full rounded-lg' />
             </div>
         </div>
 
@@ -138,12 +141,38 @@ export const FarmTabsBatches = () => {
 
       <Tabs.Content value="production" className="pt-4">
         {/* Contenido de producción */}
-        <h2>Entrasndo a produccion</h2>
+        <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
+            <div className='flex justify-between p-3 px-6 rounded-t-lg'>
+                <h3 className='font-medium dark:text-white'>7-Day Production Log</h3>
+                <span className='text-green-700 dark:text-green-500 text-sm font-bold' >Avg Production Rate: 92,3%</span>
+            </div>
+
+            <TableProduction tableHeader={tableProduction} />
+        </div>
+
+
       </Tabs.Content>
+
+      {/* Contenido de producción */}
       <Tabs.Content value="health" className="pt-4">
-        {/* Contenido de producción */}
-        <h2>Entrasndo a health</h2>
+        <div className='flex flex-wrap justify-center items-center space-x-5'>
+          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium'>healthy birds</span>
+            <h3 className='text-2xl font-bold'>1,221</h3>
+          </div>
+
+          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium'>sick birds</span>
+            <h3 className='text-2xl font-bold text-red-500'>2</h3>
+          </div>
+
+          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium'>vaccinated</span>
+            <h3 className='text-2xl font-bold text-green-700'>100%</h3>
+          </div>
+        </div>
       </Tabs.Content>
+
       <Tabs.Content value="feeding" className="pt-4">
         {/* Contenido de producción */}
         <h2>Entrasndo a el feeding</h2>

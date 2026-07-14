@@ -24,7 +24,7 @@ export const TableData = ({tableHeader}) => {
                         </span>
                     </td>
                     <td className="p-4 tracking-tighter ">
-                        <span className={`font bg-green-500/30 dark:bg-green-500/15 font-medium text-green-700 dark:text-green-500 px-2 py-0.5 uppercase rounded-lg text-[14px]`}> 
+                        <span className={`font bg-green-500/30 dark:bg-green-500/15 font-medium text-green-700 dark:text-green-500 px-2 py-0.5 uppercase rounded-lg text-xs`}> 
                             production
                         </span>
                     </td>
@@ -32,7 +32,7 @@ export const TableData = ({tableHeader}) => {
                         <div className="flex items-center space-x-2">
                             <div className="bg-red-500 h-8 w-8 rounded-full">
                             </div>
-                            <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
+                            <span className={`font-semibol rounded-lg text-base dark:text-gray-200`}> 
                                 S. Jenkins
                             </span>
                         </div>
