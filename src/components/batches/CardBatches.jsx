@@ -74,7 +74,7 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
             </div>
         </div>
 
-        <ProgressBar value={data.production} target={100} />
+        <ProgressBar value={data.production} target={100} title='Efficiency Target' />
 
         <Separator />
 

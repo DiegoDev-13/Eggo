@@ -1,9 +1,12 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import { TableData } from '../shared/TableData';
 import { TableProduction } from './TableProduction';
+import { TableHealth } from './TableHealth';
+import { ProgressBar } from '../shared/ProgressBar';
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
 const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
+const tableHealth = ['vaccine', 'date', 'status',]
 
 export const FarmTabsBatches = () => {
   return (
@@ -139,8 +142,8 @@ export const FarmTabsBatches = () => {
         </div>
       </Tabs.Content>
 
-      <Tabs.Content value="production" className="pt-4">
         {/* Contenido de producción */}
+      <Tabs.Content value="production" className="pt-4">
         <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
             <div className='flex justify-between p-3 px-6 rounded-t-lg'>
                 <h3 className='font-medium dark:text-white'>7-Day Production Log</h3>
@@ -154,7 +157,7 @@ export const FarmTabsBatches = () => {
       </Tabs.Content>
 
       {/* Contenido de producción */}
-      <Tabs.Content value="health" className="pt-4">
+      <Tabs.Content value="health" className="pt-4 flex flex-col space-y-7">
         <div className='flex flex-wrap justify-center items-center space-x-5'>
           <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
             <span className='uppercase text-xs font-medium'>healthy birds</span>
@@ -169,6 +172,49 @@ export const FarmTabsBatches = () => {
           <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
             <span className='uppercase text-xs font-medium'>vaccinated</span>
             <h3 className='text-2xl font-bold text-green-700'>100%</h3>
+          </div>
+        </div>
+
+        <div className='flex justify-around'>
+
+          <div className='w-[45%] border border-gray-600 rounded-lg'>
+            <div className='bg-slate-200 dark:bg-theme-primary-dark py-3 px-4 border-b border-b-gray-600 rounded-t-lg'>
+              <h3 className='text-base font-semibold'>Vaccination Calender</h3>
+            </div>
+            <TableHealth tableHeader={tableHealth} />
+          </div>
+
+          <div className='w-[45%] border border-gray-600 rounded-lg'>
+            <div className='py-3 px-4 rounded-t-lg flex flex-col space-y-2'>
+              <h3 className='text-base font-semibold'>Mortality Analysis (2.3%)</h3>
+              <span className='text-slate-700 text-sm'>Breakdown of cumulative mortality since arrival.</span>
+            </div>
+
+            <div className='py-3 px-4 flex flex-col space-y-2'>
+              <ProgressBar value={1.2} target={100} title='Initial Adaptation' />
+              <ProgressBar value={48} target={100} title='Heat Stress (Week 12)' />
+              <ProgressBar value={25} target={100} title='Natural / Other' />
+            </div>
+          </div>
+
+        </div>
+
+        <div className='w-full border border-gray-600 rounded-lg p-5'>
+          <div className=' rounded-t-lg flex flex-col space-y-2'>
+            <h3 className='text-base font-semibold text-gray-700'>Veterinary Observations</h3>
+          </div>
+
+          <div className='mt-2 flex space-x-2'>
+            <div className='h-10 w-10 bg-green-400 rounded-full flex justify-center items-center'>
+              <h2 className='font-semibold'>ER</h2>
+            </div>
+
+            <div>
+              <h3 className='font-semibold'>Dr. Elena Rodriguez</h3>
+              <p>
+                "Overall flock health is stable. Feathers are in good condition. Calcium levels Adjusted for peak lay cycle. Monitor ventilation during upcoming heatwave."
+              </p>
+            </div>
           </div>
         </div>
       </Tabs.Content>
