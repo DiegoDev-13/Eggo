@@ -3,10 +3,14 @@ import { TableData } from '../shared/TableData';
 import { TableProduction } from './TableProduction';
 import { TableHealth } from './TableHealth';
 import { ProgressBar } from '../shared/ProgressBar';
+import { BsForkKnife } from "react-icons/bs";
+import { IoFlaskOutline, IoTrendingUp } from "react-icons/io5";
+import {Separator} from '../shared/Separator'
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
 const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
 const tableHealth = ['vaccine', 'date', 'status',]
+const tableFinance = ['Total Revenueg (Egg Sales)', '$4,560.00',]
 
 export const FarmTabsBatches = () => {
   return (
@@ -156,7 +160,7 @@ export const FarmTabsBatches = () => {
 
       </Tabs.Content>
 
-      {/* Contenido de producción */}
+      {/* Contenido de health */}
       <Tabs.Content value="health" className="pt-4 flex flex-col space-y-7">
         <div className='flex flex-wrap justify-center items-center space-x-5'>
           <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
@@ -204,12 +208,12 @@ export const FarmTabsBatches = () => {
             <h3 className='text-base font-semibold text-gray-700'>Veterinary Observations</h3>
           </div>
 
-          <div className='mt-2 flex space-x-2'>
+          <div className='mt-2 flex space-x-3 justify-center'>
             <div className='h-10 w-10 bg-green-400 rounded-full flex justify-center items-center'>
               <h2 className='font-semibold'>ER</h2>
             </div>
 
-            <div>
+            <div className='w-170'>
               <h3 className='font-semibold'>Dr. Elena Rodriguez</h3>
               <p>
                 "Overall flock health is stable. Feathers are in good condition. Calcium levels Adjusted for peak lay cycle. Monitor ventilation during upcoming heatwave."
@@ -219,14 +223,85 @@ export const FarmTabsBatches = () => {
         </div>
       </Tabs.Content>
 
-      <Tabs.Content value="feeding" className="pt-4">
-        {/* Contenido de producción */}
-        <h2>Entrasndo a el feeding</h2>
+        {/* Contenido de feeding */}
+      <Tabs.Content value="feeding" className="pt-4 flex flex-col space-y-7">
+        <div className='flex space-x-4 justify-center'>
+
+          <div className='py-7 px-18 border border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+            <BsForkKnife size={32} className='text-amber-700' /> 
+            <span className='text-xs text-gray-600 uppercase font-bold text-center'>daily feed intake</span>
+            <h4 className='font-bold text-xl'>148g <span className='text-xs text-gray-600'>/ bird</span></h4>
+          </div>
+
+          <div className='py-7 px-18 border border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+            <IoFlaskOutline size={32} className='text-green-700' /> 
+            <span className='text-xs text-gray-600 uppercase font-bold text-center'>current formulation</span>
+            <h4 className='font-bold text-xl'>Layer Phase 2</h4>
+            <span className='text-xs text-green-700 uppercase font-bold text-center'>high calcium max</span>
+          </div>
+
+          <div className='py-7 px-18 border-2 border-green-700 rounded-lg flex flex-col justify-center items-center space-y-2'>
+            <IoTrendingUp size={32} className='text-green-700' /> 
+            <span className='text-xs text-gray-600 uppercase font-bold text-center'>fcr efficiency</span>
+            <h4 className='font-bold text-xl'>2.05</h4>
+            <span className='text-xs text-green-700 uppercase font-bold text-center'>excellent efficiency</span>
+          </div>
+
+        </div>
       </Tabs.Content>
-      <Tabs.Content value="finance" className="pt-4">
-        {/* Contenido de producción */}
-        <h2>Entrasndo a finance</h2>
+
+        {/* Contenido de finance */}
+      <Tabs.Content value="finance" className="pt-4 flex justify-between">
+
+        <div className='w-[65%] border border-gray-700 rounded-lg'>
+          <div className='flex justify-between items-center border-b border-gray-600 bg-slate-200 p-4 rounded-lg'>
+            <h2 className='text-base font-semibold'>Monthly Performance (Oct Projection)</h2>
+            <span className='text-green-700 dark:text-green-500  bg-green-500/15 px-2 rounded-sm text-sm font-semibold'>25% Profit Margin</span>
+          </div>
+
+
+          <div className='py-6 px-7'>
+            <div className='flex justify-between items-center bg-slate-200 p-2 px-4 rounded-lg mb-2'>
+              <h2 className='text-base font-semibold'>Total Revenue (Egg Sales)</h2>
+              <span className='text-green-700 dark:text-green-500 text-base font-bold'>$4,560.00</span>
+            </div>
+            <div className='flex justify-between items-center p-2 px-4'>
+              <h2 className='text-sm text-gray-500 font-semibold'>Feed Expenses</h2>
+              <span className='text-sm font-semibold'>-$1,840.00</span>
+            </div>
+            <div className='flex justify-between items-center p-2 px-4'>
+              <h2 className='text-sm text-gray-500 font-semibold'>Labor & Staff</h2>
+              <span className='text-sm font-semibold'>-$950.00</span>
+            </div>
+            <div className='flex justify-between items-center p-2 px-4'>
+              <h2 className='text-sm text-gray-500 font-semibold'>Utilities & Climate Control</h2>
+              <span className='text-sm font-semibold'>-$420.00</span>
+            </div>
+            <div className='flex justify-between items-center p-2 px-4'>
+              <h2 className='text-sm text-gray-500 font-semibold'>Medication & Vaccines</h2>
+              <span className='text-sm font-semibold'>-$120.00</span>
+            </div>
+
+            <Separator />
+
+            <div className='flex justify-between items-center p-2 px-4 '>
+              <h2 className='text-base font-semibold'>Net Monthly Profit</h2>
+              <span className='text-green-700 dark:text-green-500 text-lg font-bold'>$1,140.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div className='w-[30%] h-max rounded-lg border border-amber-700/30 p-4 bg-amber-700/10'>
+          <h2 className='uppercase text-amber-900 text-[15px] font-bold mb-3'>Financial Health</h2>
+          <p className='text-sm text-gray-800'>Batch A-102 is currently self. sustaining and profitable. Peak production lay rates are offsetting the rising feed cost seen in the last quarter</p>
+
+          <button className='uppercase text-white bg-amber-900 rounded-lg p-2 w-full my-4 font-semibold cursor-pointer hover:bg-amber-800 transition-all duration-300'>
+            download full p&l
+          </button>
+        </div>
+
       </Tabs.Content>
+
       <Tabs.Content value="history" className="pt-4">
         {/* Contenido de producción */}
         <h2>Entrasndo a ek history</h2>
