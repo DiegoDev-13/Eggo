@@ -6,11 +6,35 @@ import { ProgressBar } from '../shared/ProgressBar';
 import { BsForkKnife } from "react-icons/bs";
 import { IoFlaskOutline, IoTrendingUp } from "react-icons/io5";
 import {Separator} from '../shared/Separator'
+import { Dona } from '../shared/chart/Dona';
+import { Barras } from '../shared/chart/Barras';
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
 const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
 const tableHealth = ['vaccine', 'date', 'status',]
 const tableFinance = ['Total Revenueg (Egg Sales)', '$4,560.00',]
+
+const dataProduction = {
+  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
+  datasets: [
+    {
+      label: 'Huevos diarios',
+      data: [1102, 1089, 1040, 1101, 1098, 1112, 1105],
+      backgroundColor: 'rgba(10, 110, 35, 0.788)',
+    },
+  ],
+};
+
+const dataFeeding = {
+  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
+  datasets: [
+    {
+      label: 'Consumo (kg)',
+      data: [26, 22, 23, 28, 25, 22, 29],
+      backgroundColor: 'rgba(165, 95, 14, 0.788)',
+    },
+  ],
+};
 
 export const FarmTabsBatches = () => {
   return (
@@ -60,7 +84,7 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="general" className="pt-4 flex flex-col space-y-8 ">
         <div className='flex justify-between'>
             <div className='w-[55%] flex flex-col space-y-8'>
-                <div className='w-full border border-gray-500 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+                <div className='w-full border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
                     <div className='p-3 px-6 bg-slate-200 dark:bg-theme-primary-dark rounded-t-lg'>
                         <h3 className='font-medium dark:text-white'>Batch Identity</h3>
                     </div>
@@ -97,7 +121,7 @@ export const FarmTabsBatches = () => {
                     </div>
                 </div>
 
-                <div className='w-full border border-gray-500 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+                <div className='w-full border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
                     <div className='p-3 px-6 bg-slate-200 dark:bg-theme-primary-dark rounded-t-lg'>
                         <h3 className='font-medium dark:text-white'>Timeline & Status</h3>
                     </div>
@@ -131,24 +155,33 @@ export const FarmTabsBatches = () => {
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRz6bqdqzVD1CbOA8xkIMXzNQvVzllA4PYq19qlSGhr2Uogvc6EppPZcD9&s=10" alt="" className='h-112 w-full rounded-lg' />
             </div>
         </div>
-
-        <div className='flex'>
-            <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
-                <div className='flex justify-between p-3 px-6 rounded-t-lg'>
-                    <h3 className='font-medium dark:text-white'>Recent Activity Log</h3>
-                    <button className='text-gray-700 dark:text-gray-400 hover:text-black hover:dark:text-white font-medium transition-all duration-300 cursor-pointer'>View All History</button>
-                </div>
-
-                <TableData tableHeader={tableHeader} />
-            </div>
-
-
-        </div>
       </Tabs.Content>
 
         {/* Contenido de producción */}
-      <Tabs.Content value="production" className="pt-4">
-        <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
+      <Tabs.Content value="production" className="pt-4 flex flex-col justify-center space-y-8">
+
+        <div className='flex justify-between'>
+
+          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white'>
+            <h2 className='mb-3'>Egg Quality Distribution</h2>
+            <div className='w-full flex justify-center'>
+              <Dona />
+            </div>
+          </div>
+
+          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white'>
+            <h2 className='mb-23'>Productivity Trend</h2>
+            <div className='w-full flex justify-center items-center'>
+              <Barras data={dataProduction} text='Estabilidad de colocación' />
+            </div>
+            <div className='flex justify-between px-8'>
+              <span className='text-xs font-medium'>7 DAYS AGO</span>
+              <span className='text-xs font-medium'>TODAY</span>
+            </div> 
+          </div>
+        </div>
+
+        <div className='w-full border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
             <div className='flex justify-between p-3 px-6 rounded-t-lg'>
                 <h3 className='font-medium dark:text-white'>7-Day Production Log</h3>
                 <span className='text-green-700 dark:text-green-500 text-sm font-bold' >Avg Production Rate: 92,3%</span>
@@ -157,23 +190,23 @@ export const FarmTabsBatches = () => {
             <TableProduction tableHeader={tableProduction} />
         </div>
 
-
+        
       </Tabs.Content>
 
       {/* Contenido de health */}
       <Tabs.Content value="health" className="pt-4 flex flex-col space-y-7">
         <div className='flex flex-wrap justify-center items-center space-x-5'>
-          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
             <span className='uppercase text-xs font-medium'>healthy birds</span>
             <h3 className='text-2xl font-bold'>1,221</h3>
           </div>
 
-          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
             <span className='uppercase text-xs font-medium'>sick birds</span>
             <h3 className='text-2xl font-bold text-red-500'>2</h3>
           </div>
 
-          <div className='flex flex-col space-y-1 border border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
             <span className='uppercase text-xs font-medium'>vaccinated</span>
             <h3 className='text-2xl font-bold text-green-700'>100%</h3>
           </div>
@@ -181,20 +214,20 @@ export const FarmTabsBatches = () => {
 
         <div className='flex justify-around'>
 
-          <div className='w-[45%] border border-gray-600 rounded-lg'>
+          <div className='w-[45%] border border-gray-400 dark:border-gray-600 rounded-lg'>
             <div className='bg-slate-200 dark:bg-theme-primary-dark py-3 px-4 border-b border-b-gray-600 rounded-t-lg'>
               <h3 className='text-base font-semibold'>Vaccination Calender</h3>
             </div>
             <TableHealth tableHeader={tableHealth} />
           </div>
 
-          <div className='w-[45%] border border-gray-600 rounded-lg'>
+          <div className='w-[45%] bg-white border border-gray-400 dark:border-gray-600 rounded-lg'>
             <div className='py-3 px-4 rounded-t-lg flex flex-col space-y-2'>
               <h3 className='text-base font-semibold'>Mortality Analysis (2.3%)</h3>
               <span className='text-slate-700 text-sm'>Breakdown of cumulative mortality since arrival.</span>
             </div>
 
-            <div className='py-3 px-4 flex flex-col space-y-2'>
+            <div className=' py-3 px-4 flex flex-col space-y-2'>
               <ProgressBar value={1.2} target={100} title='Initial Adaptation' />
               <ProgressBar value={48} target={100} title='Heat Stress (Week 12)' />
               <ProgressBar value={25} target={100} title='Natural / Other' />
@@ -203,7 +236,7 @@ export const FarmTabsBatches = () => {
 
         </div>
 
-        <div className='w-full border border-gray-600 rounded-lg p-5'>
+        <div className='w-full bg-white border border-gray-400 dark:border-gray-600 rounded-lg p-5'>
           <div className=' rounded-t-lg flex flex-col space-y-2'>
             <h3 className='text-base font-semibold text-gray-700'>Veterinary Observations</h3>
           </div>
@@ -227,20 +260,20 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="feeding" className="pt-4 flex flex-col space-y-7">
         <div className='flex space-x-4 justify-center'>
 
-          <div className='py-7 px-18 border border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+          <div className='bg-white py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
             <BsForkKnife size={32} className='text-amber-700' /> 
             <span className='text-xs text-gray-600 uppercase font-bold text-center'>daily feed intake</span>
             <h4 className='font-bold text-xl'>148g <span className='text-xs text-gray-600'>/ bird</span></h4>
           </div>
 
-          <div className='py-7 px-18 border border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+          <div className='bg-white py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
             <IoFlaskOutline size={32} className='text-green-700' /> 
             <span className='text-xs text-gray-600 uppercase font-bold text-center'>current formulation</span>
             <h4 className='font-bold text-xl'>Layer Phase 2</h4>
             <span className='text-xs text-green-700 uppercase font-bold text-center'>high calcium max</span>
           </div>
 
-          <div className='py-7 px-18 border-2 border-green-700 rounded-lg flex flex-col justify-center items-center space-y-2'>
+          <div className='bg-white py-7 px-18 border-2 border-green-700 rounded-lg flex flex-col justify-center items-center space-y-2'>
             <IoTrendingUp size={32} className='text-green-700' /> 
             <span className='text-xs text-gray-600 uppercase font-bold text-center'>fcr efficiency</span>
             <h4 className='font-bold text-xl'>2.05</h4>
@@ -248,19 +281,23 @@ export const FarmTabsBatches = () => {
           </div>
 
         </div>
+
+        <div className='w-full bg-white border border-gray-400 dark:border-gray-600 rounded-lg p-10'>
+          <Barras data={dataFeeding} text='Consumption Trend' /> 
+        </div>
       </Tabs.Content>
 
         {/* Contenido de finance */}
       <Tabs.Content value="finance" className="pt-4 flex justify-between">
 
-        <div className='w-[65%] border border-gray-700 rounded-lg'>
-          <div className='flex justify-between items-center border-b border-gray-600 bg-slate-200 p-4 rounded-lg'>
+        <div className='w-[65%] border border-gray-400 dark:border-gray-600 rounded-lg'>
+          <div className='flex justify-between items-center border-b border-gray-400 dark:border-gray-600 bg-slate-200 p-4 rounded-t-lg'>
             <h2 className='text-base font-semibold'>Monthly Performance (Oct Projection)</h2>
             <span className='text-green-700 dark:text-green-500  bg-green-500/15 px-2 rounded-sm text-sm font-semibold'>25% Profit Margin</span>
           </div>
 
 
-          <div className='py-6 px-7'>
+          <div className='bg-white py-6 px-7 rounded-b-lg'>
             <div className='flex justify-between items-center bg-slate-200 p-2 px-4 rounded-lg mb-2'>
               <h2 className='text-base font-semibold'>Total Revenue (Egg Sales)</h2>
               <span className='text-green-700 dark:text-green-500 text-base font-bold'>$4,560.00</span>
@@ -302,9 +339,18 @@ export const FarmTabsBatches = () => {
 
       </Tabs.Content>
 
-      <Tabs.Content value="history" className="pt-4">
-        {/* Contenido de producción */}
-        <h2>Entrasndo a ek history</h2>
+        {/* Contenido de history */}
+      <Tabs.Content value="history" className="pt-4 flex flex-col justify-center">
+        <div className='flex'>
+            <div className='w-full border border-gray-400 rounded-lg bg-white dark:bg-theme-third-dark'>
+                <div className='flex justify-between p-3 px-6 rounded-t-lg'>
+                    <h3 className='font-medium dark:text-white'>Recent Activity Log</h3>
+                    <button className='text-gray-700 dark:text-gray-400 hover:text-black hover:dark:text-white font-medium transition-all duration-300 cursor-pointer'>View All History</button>
+                </div>
+
+                <TableData tableHeader={tableHeader} />
+            </div>
+        </div>
       </Tabs.Content>
     </Tabs.Root>
   );

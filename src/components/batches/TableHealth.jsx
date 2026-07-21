@@ -17,7 +17,7 @@ export const TableHealth = ({tableHeader}) => {
 
             <tbody className="[&_tr:last-child]:border-0">
 
-                <tr key={1} className="border-b border-stone-400" >
+                <tr key={1} className="bg-white border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
                             Mareks Disease
@@ -35,7 +35,7 @@ export const TableHealth = ({tableHeader}) => {
                     </td>
                 </tr>
 
-                <tr key={1} className="border-b border-stone-400" >
+                <tr key={1} className="bg-white border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
                             Newcastle (B1)
@@ -53,7 +53,7 @@ export const TableHealth = ({tableHeader}) => {
                     </td>
                 </tr>
 
-                <tr key={1} className="border-b border-stone-400" >
+                <tr key={1} className="bg-white border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
                             Gumboro (IBD)
@@ -71,7 +71,7 @@ export const TableHealth = ({tableHeader}) => {
                     </td>
                 </tr>
 
-                <tr key={1} className="border-b border-stone-400" >
+                <tr key={1} className="bg-white border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
                             Newcastle Booster
@@ -89,7 +89,7 @@ export const TableHealth = ({tableHeader}) => {
                     </td>
                 </tr>
 
-                <tr key={1} className="border-b border-stone-400" >
+                <tr key={1} className="bg-white border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
                             Avian Flu
