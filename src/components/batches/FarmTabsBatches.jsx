@@ -8,35 +8,63 @@ import { IoFlaskOutline, IoTrendingUp } from "react-icons/io5";
 import {Separator} from '../shared/Separator'
 import { Dona } from '../shared/chart/Dona';
 import { Barras } from '../shared/chart/Barras';
+import { useEffect, useState } from 'react';
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
 const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
 const tableHealth = ['vaccine', 'date', 'status',]
 const tableFinance = ['Total Revenueg (Egg Sales)', '$4,560.00',]
 
-const dataProduction = {
-  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
-  datasets: [
-    {
-      label: 'Huevos diarios',
-      data: [1102, 1089, 1040, 1101, 1098, 1112, 1105],
-      backgroundColor: 'rgba(10, 110, 35, 0.788)',
-    },
-  ],
-};
 
-const dataFeeding = {
-  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
-  datasets: [
-    {
-      label: 'Consumo (kg)',
-      data: [26, 22, 23, 28, 25, 22, 29],
-      backgroundColor: 'rgba(165, 95, 14, 0.788)',
-    },
-  ],
-};
+
 
 export const FarmTabsBatches = () => {
+
+  const [isDark, setIsDark] = useState(false);
+      
+  useEffect(() => {
+    // Función para revisar si la etiqueta <html> tiene la clase 'dark'
+    const checkDarkMode = () => {
+      const isDarkModeActive = document.documentElement.classList.contains('dark');
+      setIsDark(isDarkModeActive);
+    };
+
+    // Revisamos el estado al montar el componente
+    checkDarkMode();
+
+    // Creamos un observador para detectar cambios en las clases del <html> en tiempo real
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    return () => observer.disconnect(); // Limpiamos el observador
+  }, []);
+
+  const dataProduction = {
+    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
+    datasets: [
+      {
+        label: 'Huevos diarios',
+        data: [1102, 1089, 1040, 1101, 1098, 1112, 1105],
+        backgroundColor: isDark ? 'rgba(17, 189, 60, 0.788)' : 'rgba(10, 110, 35, 0.788)',
+        color: isDark ? '#ffffff' : '#000000', 
+      },
+    ],
+  };
+
+  const dataFeeding = {
+    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
+    datasets: [
+      {
+        label: 'Consumo (kg)',
+        data: [26, 22, 23, 28, 25, 22, 29],
+        backgroundColor: isDark ? 'rgba(231, 132, 18, 0.788)' : 'rgba(165, 95, 14, 0.788)',
+      },
+    ],
+  };
+
   return (
     <Tabs.Root defaultValue="general" className="w-full">
       {/* Lista de Navegación */}
@@ -162,21 +190,21 @@ export const FarmTabsBatches = () => {
 
         <div className='flex justify-between'>
 
-          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white'>
-            <h2 className='mb-3'>Egg Quality Distribution</h2>
+          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+            <h2 className='mb-3 dark:text-white'>Egg Quality Distribution</h2>
             <div className='w-full flex justify-center'>
-              <Dona />
+              <Dona isDark={isDark} />
             </div>
           </div>
 
-          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white'>
-            <h2 className='mb-23'>Productivity Trend</h2>
+          <div className='w-[48%] p-4 border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
+            <h2 className='mb-23 dark:text-white'>Productivity Trend</h2>
             <div className='w-full flex justify-center items-center'>
               <Barras data={dataProduction} text='Estabilidad de colocación' />
             </div>
             <div className='flex justify-between px-8'>
-              <span className='text-xs font-medium'>7 DAYS AGO</span>
-              <span className='text-xs font-medium'>TODAY</span>
+              <span className='text-xs font-medium dark:text-white'>7 DAYS AGO</span>
+              <span className='text-xs font-medium dark:text-white'>TODAY</span>
             </div> 
           </div>
         </div>
@@ -196,18 +224,18 @@ export const FarmTabsBatches = () => {
       {/* Contenido de health */}
       <Tabs.Content value="health" className="pt-4 flex flex-col space-y-7">
         <div className='flex flex-wrap justify-center items-center space-x-5'>
-          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
-            <span className='uppercase text-xs font-medium'>healthy birds</span>
-            <h3 className='text-2xl font-bold'>1,221</h3>
+          <div className='bg-white dark:bg-theme-third-dark flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium dark:text-gray-400'>healthy birds</span>
+            <h3 className='text-2xl font-bold dark:text-white'>1,221</h3>
           </div>
 
-          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
-            <span className='uppercase text-xs font-medium'>sick birds</span>
+          <div className='bg-white dark:bg-theme-third-dark flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium dark:text-gray-400'>sick birds</span>
             <h3 className='text-2xl font-bold text-red-500'>2</h3>
           </div>
 
-          <div className='bg-white flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
-            <span className='uppercase text-xs font-medium'>vaccinated</span>
+          <div className='bg-white dark:bg-theme-third-dark flex flex-col space-y-1 border border-gray-400 dark:border-gray-600 w-[30%] px-4 py-3 rounded-lg'>
+            <span className='uppercase text-xs font-medium dark:text-gray-400'>vaccinated</span>
             <h3 className='text-2xl font-bold text-green-700'>100%</h3>
           </div>
         </div>
@@ -216,15 +244,15 @@ export const FarmTabsBatches = () => {
 
           <div className='w-[45%] border border-gray-400 dark:border-gray-600 rounded-lg'>
             <div className='bg-slate-200 dark:bg-theme-primary-dark py-3 px-4 border-b border-b-gray-600 rounded-t-lg'>
-              <h3 className='text-base font-semibold'>Vaccination Calender</h3>
+              <h3 className='text-base font-semibold dark:text-white'>Vaccination Calender</h3>
             </div>
             <TableHealth tableHeader={tableHealth} />
           </div>
 
-          <div className='w-[45%] bg-white border border-gray-400 dark:border-gray-600 rounded-lg'>
+          <div className='w-[45%] bg-white dark:dark:bg-theme-third-dark border border-gray-400 dark:border-gray-600 rounded-lg'>
             <div className='py-3 px-4 rounded-t-lg flex flex-col space-y-2'>
-              <h3 className='text-base font-semibold'>Mortality Analysis (2.3%)</h3>
-              <span className='text-slate-700 text-sm'>Breakdown of cumulative mortality since arrival.</span>
+              <h3 className='text-base font-semibold dark:text-white'>Mortality Analysis (2.3%)</h3>
+              <span className='text-slate-700 text-sm dark:text-gray-3   00'>Breakdown of cumulative mortality since arrival.</span>
             </div>
 
             <div className=' py-3 px-4 flex flex-col space-y-2'>
@@ -236,9 +264,9 @@ export const FarmTabsBatches = () => {
 
         </div>
 
-        <div className='w-full bg-white border border-gray-400 dark:border-gray-600 rounded-lg p-5'>
+        <div className='w-full bg-white dark:dark:bg-theme-third-dark border border-gray-400 dark:border-gray-600 rounded-lg p-5'>
           <div className=' rounded-t-lg flex flex-col space-y-2'>
-            <h3 className='text-base font-semibold text-gray-700'>Veterinary Observations</h3>
+            <h3 className='text-base font-semibold text-gray-700 dark:text-gray-200'>Veterinary Observations</h3>
           </div>
 
           <div className='mt-2 flex space-x-3 justify-center'>
@@ -247,8 +275,8 @@ export const FarmTabsBatches = () => {
             </div>
 
             <div className='w-170'>
-              <h3 className='font-semibold'>Dr. Elena Rodriguez</h3>
-              <p>
+              <h3 className='font-semibold dark:text-white'>Dr. Elena Rodriguez</h3>
+              <p className='dark:text-gray-300'>
                 "Overall flock health is stable. Feathers are in good condition. Calcium levels Adjusted for peak lay cycle. Monitor ventilation during upcoming heatwave."
               </p>
             </div>
@@ -260,29 +288,29 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="feeding" className="pt-4 flex flex-col space-y-7">
         <div className='flex space-x-4 justify-center'>
 
-          <div className='bg-white py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+          <div className='bg-white dark:dark:bg-theme-third-dark py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
             <BsForkKnife size={32} className='text-amber-700' /> 
-            <span className='text-xs text-gray-600 uppercase font-bold text-center'>daily feed intake</span>
-            <h4 className='font-bold text-xl'>148g <span className='text-xs text-gray-600'>/ bird</span></h4>
+            <span className='text-xs text-gray-600 dark:text-gray-400 uppercase font-bold text-center'>daily feed intake</span>
+            <h4 className='font-bold text-xl dark:text-white'>148g <span className='text-xs text-gray-600 dark:text-gray-400'>/ bird</span></h4>
           </div>
 
-          <div className='bg-white py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
-            <IoFlaskOutline size={32} className='text-green-700' /> 
-            <span className='text-xs text-gray-600 uppercase font-bold text-center'>current formulation</span>
-            <h4 className='font-bold text-xl'>Layer Phase 2</h4>
-            <span className='text-xs text-green-700 uppercase font-bold text-center'>high calcium max</span>
+          <div className='bg-white dark:dark:bg-theme-third-dark py-7 px-18 border border-gray-400 dark:border-gray-600 rounded-lg flex flex-col justify-center items-center space-y-2'>
+            <IoFlaskOutline size={32} className='text-green-700 dark:text-green-500' /> 
+            <span className='text-xs text-gray-600 dark:text-gray-400 uppercase font-bold text-center'>current formulation</span>
+            <h4 className='font-bold text-xl dark:text-white'>Layer Phase 2</h4>
+            <span className='text-xs text-green-700 dark:text-green-500  uppercase font-bold text-center'>high calcium max</span>
           </div>
 
-          <div className='bg-white py-7 px-18 border-2 border-green-700 rounded-lg flex flex-col justify-center items-center space-y-2'>
-            <IoTrendingUp size={32} className='text-green-700' /> 
-            <span className='text-xs text-gray-600 uppercase font-bold text-center'>fcr efficiency</span>
-            <h4 className='font-bold text-xl'>2.05</h4>
-            <span className='text-xs text-green-700 uppercase font-bold text-center'>excellent efficiency</span>
+          <div className='bg-white dark:dark:bg-theme-third-dark py-7 px-18 border-2 border-green-700 rounded-lg flex flex-col justify-center items-center space-y-2'>
+            <IoTrendingUp size={32} className='text-green-700 dark:text-green-500'  /> 
+            <span className='text-xs text-gray-600 dark:text-gray-400 uppercase font-bold text-center'>fcr efficiency</span>
+            <h4 className='font-bold text-xl dark:text-white'>2.05</h4>
+            <span className='text-xs text-green-700  dark:text-green-500 uppercase font-bold text-center'>excellent efficiency</span>
           </div>
 
         </div>
 
-        <div className='w-full bg-white border border-gray-400 dark:border-gray-600 rounded-lg p-10'>
+        <div className='w-full bg-white dark:dark:bg-theme-third-dark  border border-gray-400 dark:border-gray-600 rounded-lg p-10'>
           <Barras data={dataFeeding} text='Consumption Trend' /> 
         </div>
       </Tabs.Content>
@@ -291,48 +319,48 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="finance" className="pt-4 flex justify-between">
 
         <div className='w-[65%] border border-gray-400 dark:border-gray-600 rounded-lg'>
-          <div className='flex justify-between items-center border-b border-gray-400 dark:border-gray-600 bg-slate-200 p-4 rounded-t-lg'>
-            <h2 className='text-base font-semibold'>Monthly Performance (Oct Projection)</h2>
+          <div className='flex justify-between items-center border-b border-gray-400 dark:border-gray-600 bg-slate-200 dark:bg-theme-primary-dark  p-4 rounded-t-lg'>
+            <h2 className='text-base font-semibold dark:text-white'>Monthly Performance (Oct Projection)</h2>
             <span className='text-green-700 dark:text-green-500  bg-green-500/15 px-2 rounded-sm text-sm font-semibold'>25% Profit Margin</span>
           </div>
 
 
-          <div className='bg-white py-6 px-7 rounded-b-lg'>
-            <div className='flex justify-between items-center bg-slate-200 p-2 px-4 rounded-lg mb-2'>
-              <h2 className='text-base font-semibold'>Total Revenue (Egg Sales)</h2>
+          <div className='bg-white dark:dark:bg-theme-third-dark py-6 px-7 rounded-b-lg'>
+            <div className='flex justify-between items-center bg-slate-200 dark:bg-theme-primary-dark p-2 px-4 rounded-lg mb-2'>
+              <h2 className='text-base font-semibold dark:text-white'>Total Revenue (Egg Sales)</h2>
               <span className='text-green-700 dark:text-green-500 text-base font-bold'>$4,560.00</span>
             </div>
             <div className='flex justify-between items-center p-2 px-4'>
-              <h2 className='text-sm text-gray-500 font-semibold'>Feed Expenses</h2>
-              <span className='text-sm font-semibold'>-$1,840.00</span>
+              <h2 className='text-sm text-gray-500 dark:text-gray-400 font-semibold'>Feed Expenses</h2>
+              <span className='text-sm font-semibold dark:text-white'>-$1,840.00</span>
             </div>
             <div className='flex justify-between items-center p-2 px-4'>
-              <h2 className='text-sm text-gray-500 font-semibold'>Labor & Staff</h2>
-              <span className='text-sm font-semibold'>-$950.00</span>
+              <h2 className='text-sm text-gray-500 dark:text-gray-400 font-semibold'>Labor & Staff</h2>
+              <span className='text-sm font-semibold dark:text-white'>-$950.00</span>
             </div>
             <div className='flex justify-between items-center p-2 px-4'>
-              <h2 className='text-sm text-gray-500 font-semibold'>Utilities & Climate Control</h2>
-              <span className='text-sm font-semibold'>-$420.00</span>
+              <h2 className='text-sm text-gray-500 dark:text-gray-400 font-semibold'>Utilities & Climate Control</h2>
+              <span className='text-sm font-semibold dark:text-white'>-$420.00</span>
             </div>
             <div className='flex justify-between items-center p-2 px-4'>
-              <h2 className='text-sm text-gray-500 font-semibold'>Medication & Vaccines</h2>
-              <span className='text-sm font-semibold'>-$120.00</span>
+              <h2 className='text-sm text-gray-500 dark:text-gray-400 font-semibold'>Medication & Vaccines</h2>
+              <span className='text-sm font-semibold dark:text-white'>-$120.00</span>
             </div>
 
             <Separator />
 
             <div className='flex justify-between items-center p-2 px-4 '>
-              <h2 className='text-base font-semibold'>Net Monthly Profit</h2>
+              <h2 className='text-base font-semibold dark:text-white'>Net Monthly Profit</h2>
               <span className='text-green-700 dark:text-green-500 text-lg font-bold'>$1,140.00</span>
             </div>
           </div>
         </div>
 
-        <div className='w-[30%] h-max rounded-lg border border-amber-700/30 p-4 bg-amber-700/10'>
-          <h2 className='uppercase text-amber-900 text-[15px] font-bold mb-3'>Financial Health</h2>
-          <p className='text-sm text-gray-800'>Batch A-102 is currently self. sustaining and profitable. Peak production lay rates are offsetting the rising feed cost seen in the last quarter</p>
+        <div className='w-[30%] h-max rounded-lg border border-amber-700/30 p-4 bg-amber-700/10 dark:bg-amber-600/10'>
+          <h2 className='uppercase text-amber-900 dark:text-amber-600 text-[15px] font-bold mb-3'>Financial Health</h2>
+          <p className='text-sm text-gray-800 dark:text-gray-400'>Batch A-102 is currently self. sustaining and profitable. Peak production lay rates are offsetting the rising feed cost seen in the last quarter</p>
 
-          <button className='uppercase text-white bg-amber-900 rounded-lg p-2 w-full my-4 font-semibold cursor-pointer hover:bg-amber-800 transition-all duration-300'>
+          <button className='uppercase text-white bg-amber-900 dark:bg-amber-600 rounded-lg p-2 w-full my-4 font-semibold cursor-pointer hover:bg-amber-800 transition-all duration-300'>
             download full p&l
           </button>
         </div>

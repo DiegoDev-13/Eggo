@@ -3,7 +3,7 @@ import { AppBar } from "../components/shared/AppBar"
 export const Produccion = () => {
   return (
     <>
-      <AppBar />
+      <h1>Production</h1>
     </>
   )
 }

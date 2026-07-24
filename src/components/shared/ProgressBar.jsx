@@ -6,7 +6,7 @@ export const ProgressBar = ({ value, target, title }) => {
     <div className="w-full max-w-md font-sans mb-5">
       {/* Textos superiores */}
       <div className="flex justify-between items-center mb-3 text-sm">
-        <span className="text-gray-700 font-medium">{title}</span>
+        <span className="text-gray-700 font-medium text-white">{title}</span>
         <span className="text-emerald-800 font-semibold dark:text-green-500">{value}% / {target}%</span>
       </div>
       

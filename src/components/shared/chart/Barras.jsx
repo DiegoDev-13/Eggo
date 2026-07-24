@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
@@ -18,29 +19,24 @@ ChartJS.register(
   Legend
 );
 
-// const labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+export function Barras({data, text, isDark}) {
 
-// export const data = {
-//   labels, 
-//   datasets: [
-//     {
-//       label: 'Huevos diarios',
-//       data: [1102, 1089, 1040, 1101, 1098, 1112, 1105],
-//       backgroundColor: 'rgba(10, 110, 35, 0.788)',
-//     },
-//   ],
-// };
-
-export function Barras({data, text}) {
     const options = {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top',
-            },
+            labels: {
+              // 🎨 Negro (#000000) en modo claro, Blanco (#ffffff) en modo oscuro
+              color: isDark ? '#ffffff' : '#000000', 
+              font: {
+                size: 14,
+              }
+            }
+          },
             title: {
                 display: true,
                 text: text,
+                color: isDark ? '#ffffff' : '#858fa1', 
             },
         },
     };
