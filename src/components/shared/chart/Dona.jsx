@@ -17,7 +17,7 @@ export function Dona({isDark}) {
         // backgroundColor: isDark ? 'rgba(17, 189, 60, 0.788)' : 'rgba(10, 110, 35, 0.788)',
         backgroundColor: isDark ? [
           'rgba(17, 189, 60, 0.788)',
-          'rgba(44, 197, 103, 0.158)',
+          'rgba(71, 241, 136, 0.37)',
         ] : [
           'rgba(10, 110, 35, 0.788)',
           'rgba(29, 143, 73, 0.322)',

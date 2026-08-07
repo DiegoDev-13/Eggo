@@ -130,7 +130,7 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
                                         <LuCirclePlus size={22} className="text-white" />
                                         Registrar Producción
                                     </button>
-                                    <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
+                                    {/* <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
                                         <MdOutlineHeartBroken size={22} /> 
                                         Anotar Muertes
                                     </button> 
@@ -141,7 +141,7 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
                                     <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
                                         <MdOutlineEggAlt size={22} /> 
                                         Agregar Alimento
-                                    </button> 
+                                    </button>  */}
                                     <div className="w-full h-px bg-gray-400" />
                                     <button className="px-6 py-2 text-red-500 font-semibold flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleDelete}> 
                                         <FaRegTrashAlt size={18} /> 
