@@ -51,7 +51,11 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
             initialAmount: data.initialAmount,
             totalDeaths: data.totalDeaths,
             totalSold: data.totalSold,
-            currentQuantity: data.initialAmount - data.totalDeaths - data.totalSold
+            currentQuantity: data.initialAmount - data.totalDeaths - data.totalSold,
+            batcheLocation: data.batcheLocation,
+            nameSupplier: data.nameSupplier,
+            batchleader: data.batchleader,
+            AdditionalNotes: data.AdditionalNotes
         }
         
         // console.log(dataBatche)
@@ -179,10 +183,10 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
                                                 <label htmlFor="initialAmount" className="font-semibold dark:text-gray-200 text-gray-800">Ubicación de Lote <span className="text-red-600 text-xl">*</span></label>
                                                 <div className="bg-white dark:bg-theme-third-dark flex items-center pl-3 border border-gray-500 rounded-lg">
                                                     <MdOutlineLocationOn size={26} />
-                                                    <input type="text" id="initialAmount" {...register("initialAmount")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Ingresa ubicación"/>
+                                                    <input type="text" id="batcheLocation" {...register("batcheLocation")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Ingresa ubicación"/>
                                                 </div>
                                                 {
-                                                    errors.initialAmount && <span className="text-sm text-red-500">{errors.initialAmount.message}</span>
+                                                    errors.batcheLocation && <span className="text-sm text-red-500">{errors.batcheLocation.message}</span>
                                                 }
                                             </div>
 
@@ -218,35 +222,35 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
 
 
                                             <div className="w-full flex flex-col space-y-1">
-                                                <label htmlFor="totalDeaths" className="font-semibold dark:text-gray-200 text-gray-800">Proveedor</label>
+                                                <label htmlFor="nameSupplier" className="font-semibold dark:text-gray-200 text-gray-800">Proveedor</label>
                                                 <div className="bg-white dark:bg-theme-third-dark flex items-center pl-3 border border-gray-500 rounded-lg">
                                                     <RiTruckLine size={22} />
-                                                    <input type="text" id="totalDeaths" {...register("totalDeaths")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Ingresa proveedor"/>
+                                                    <input type="text" id="nameSupplier" {...register("nameSupplier")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Ingresa proveedor"/>
                                                 </div>
                                                 {
-                                                    errors.totalDeaths && <span className="text-sm text-red-500">{errors.totalDeaths.message}</span>
+                                                    errors.nameSupplier && <span className="text-sm text-red-500">{errors.nameSupplier.message}</span>
                                                 }
                                             </div>
 
                                             <div className="w-full flex flex-col space-y-1">
-                                                <label htmlFor="totalSold" className="font-semibold dark:text-gray-200 text-gray-800">Líder de lote</label>
+                                                <label htmlFor="batchleader" className="font-semibold dark:text-gray-200 text-gray-800">Líder de lote</label>
                                                 <div className="bg-white dark:bg-theme-third-dark flex items-center pl-3 border border-gray-500 rounded-lg">
                                                     <MdOutlineSupportAgent size={24} />
-                                                    <input type="text" id="totalSold" {...register("totalSold")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Nombre de lider"/>
+                                                    <input type="text" id="batchleader" {...register("batchleader")} className="w-full ml-1 p-2 rounded-lg focus:outline-none dark:text-white transition-all duration-300"  placeholder="Nombre de lider"/>
                                                 </div>
                                                 {
-                                                    errors.totalSold && <span className="text-sm text-red-500">{errors.totalSold.message}</span>
+                                                    errors.batchleader && <span className="text-sm text-red-500">{errors.batchleader.message}</span>
                                                 }
                                             </div>
                                         </div>
 
                                         <div className="w-full flex flex-col space-y-1">
-                                            <label htmlFor="totalSold" className="font-semibold dark:text-gray-200 text-gray-800">Notas Adicionales</label>
-                                            <textarea name="" id="notes" {...register("totalSold")} className="w-full h-50 resize-none bg-white dark:bg-theme-third-dark p-4 border border-gray-500 rounded-lg focus:outline-none focus:bg-gray-200 dark:focus:bg-gray-700 dark:text-white transition-all duration-300" 
+                                            <label htmlFor="AdditionalNotes" className="font-semibold dark:text-gray-200 text-gray-800">Notas Adicionales</label>
+                                            <textarea name="" id="notes" {...register("AdditionalNotes")} className="w-full h-50 resize-none bg-white dark:bg-theme-third-dark p-4 border border-gray-500 rounded-lg focus:outline-none focus:bg-gray-200 dark:focus:bg-gray-700 dark:text-white transition-all duration-300" 
                                             placeholder="Notas adicionales..."
                                             ></textarea>
                                             {
-                                                errors.totalSold && <span className="text-sm text-red-500">{errors.totalSold.message}</span>
+                                                errors.AdditionalNotes && <span className="text-sm text-red-500">{errors.AdditionalNotes.message}</span>
                                             }
                                         </div>
 
@@ -284,7 +288,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
                                     Cancelar
                                 </button> 
 
-                                <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border border-black dark:border-none px-6 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" >
+                                <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border border-black dark:border-none px-6 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleSubmit(onSubmit)}>
                                     Registrar Producción
                                 </button>
                             </div>

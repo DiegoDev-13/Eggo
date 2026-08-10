@@ -23,4 +23,8 @@ export const useAddBatcheShema = z.object({
     initialAmount: z.coerce.number({ required_error: "El monto inicial es requerido", invalid_type_error: "Debes ingresar un número válido" }).min(1, "El monto inicial debe ser mayor a 0") .max(999999, "El monto supera el límite permitido"),
     totalDeaths: z.coerce.number({ required_error: "El total de aves muertas es requerido", invalid_type_error: "Debes ingresar un número válido" }).min(0, "El total no debe ser menor a 0") .max(999999, "El monto supera el límite permitido"),
     totalSold: z.coerce.number({ required_error: "El total de aves vendidas es requerido", invalid_type_error: "Debes ingresar un número válido" }).min(0, "El total no debe ser menor a 0") .max(999999, "El monto supera el límite permitido"),
+    batcheLocation: z.string().min(3, 'La ubicación del lote debe tener minimo 3 caracteres').max(25, 'No maximo 25 caracteres'),
+    nameSupplier: z.string().min(3, 'El nombre del Proveedor tener minimo 3 caracteres').max(25, 'No maximo 25 caracteres'),
+    batchleader: z.string().min(3, 'El nombre del lider tener minimo 3 caracteres').max(25, 'No maximo 25 caracteres'),
+    AdditionalNotes: z.string().min(0, 'Las notas adicionales tener minimo 5 caracteres').max(100, 'No maximo 100 caracteres'),
 })

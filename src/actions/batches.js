@@ -17,7 +17,11 @@ export const addBatches = async ({dataBatche}) => {
             initial_amount: dataBatche.initialAmount,
             total_deaths: dataBatche.totalDeaths,
             total_sold: dataBatche.totalSold,
-            current_quantity: dataBatche.currentQuantity
+            current_quantity: dataBatche.currentQuantity,
+            farm_location: dataBatche.batcheLocation,
+            supplier: dataBatche.nameSupplier,
+            batch_lead: dataBatche.batchleader,
+            additional_notes: dataBatche.AdditionalNotes
         })
 
         if(error) {
