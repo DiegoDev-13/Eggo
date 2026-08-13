@@ -9,6 +9,8 @@ import {Separator} from '../shared/Separator'
 import { Dona } from '../shared/chart/Dona';
 import { Barras } from '../shared/chart/Barras';
 import { useEffect, useState } from 'react';
+import { SpinnerLoading } from '../shared/SpinnerLoading';
+import { useGetBatcheById } from '../../hooks/batches/useGetBatcheById';
 
 const tableHeader = ['date & time', 'action', 'user', 'description']
 const tableProduction = ['date', 'total eggs collected', 'broken eggs', 'dirty eggs', 'production rate (%)']
@@ -16,9 +18,7 @@ const tableHealth = ['vaccine', 'date', 'status',]
 const tableFinance = ['Total Revenueg (Egg Sales)', '$4,560.00',]
 
 
-
-
-export const FarmTabsBatches = () => {
+export const FarmTabsBatches = ({batcheIdDetails}) => {
 
   const [isDark, setIsDark] = useState(false);
       
@@ -42,6 +42,9 @@ export const FarmTabsBatches = () => {
     return () => observer.disconnect(); // Limpiamos el observador
   }, []);
 
+
+  const {data: batcheData, isLoading, isError} = useGetBatcheById(batcheIdDetails)
+
   const dataProduction = {
     labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'], 
     datasets: [
@@ -64,6 +67,10 @@ export const FarmTabsBatches = () => {
       },
     ],
   };
+
+  console.log(batcheData)
+
+  if (isLoading) return <SpinnerLoading />
 
   return (
     <Tabs.Root defaultValue="general" className="w-full">
@@ -112,6 +119,7 @@ export const FarmTabsBatches = () => {
       <Tabs.Content value="general" className="pt-4 flex flex-col space-y-8 ">
         <div className='flex justify-between'>
             <div className='w-[55%] flex flex-col space-y-8'>
+
                 <div className='w-full border border-gray-400 dark:border-gray-600 rounded-lg bg-white dark:bg-theme-third-dark'>
                     <div className='p-3 px-6 bg-slate-200 dark:bg-theme-primary-dark rounded-t-lg'>
                         <h3 className='font-medium dark:text-white'>Batch Identity</h3>
@@ -120,11 +128,11 @@ export const FarmTabsBatches = () => {
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Name</h4>
-                                <span className='text-base font-medium dark:text-white'>White Leghorn A-102</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.name_batche}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Breed</h4>
-                                <span className='text-base font-medium dark:text-white'>White Leghorn</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.genetic_line}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Barn / Unit</h4>
@@ -135,15 +143,15 @@ export const FarmTabsBatches = () => {
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Code</h4>
-                                <span className='text-base font-medium dark:text-white'>BATCH-2026-001</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.id}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Farm / Location</h4>
-                                <span className='text-base font-medium dark:text-white'>Main Farm - Unit 4</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.farm_location}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Supplier</h4>
-                                <span className='text-base font-medium dark:text-white'>Heritage Hatchery</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.supplier}</span>
                              </div>
                         </div>
                     </div>
@@ -157,7 +165,7 @@ export const FarmTabsBatches = () => {
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Arrival Date</h4>
-                                <span className='text-base font-medium dark:text-white'>Jan 15, 2026</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.birthDate}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Cycle End Projection</h4>
@@ -168,11 +176,11 @@ export const FarmTabsBatches = () => {
                         <div className='flex flex-col space-y-3'>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Current Age</h4>
-                                <span className='text-base font-medium dark:text-white'>42 Weeks</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.current_age}</span>
                              </div>
                              <div className='flex flex-col'>
                                 <h4 className='text-sm text-black/80 font-medium dark:text-gray-400'>Batch Lead</h4>
-                                <span className='text-base font-medium dark:text-white'>Samuel Jenkins</span>
+                                <span className='text-base font-medium dark:text-white'>{batcheData.batch_lead}</span>
                              </div>
                         </div>
                     </div>
@@ -180,7 +188,11 @@ export const FarmTabsBatches = () => {
                 
             </div>
             <div className='w-[40%] h-40 rounded-lg'>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRz6bqdqzVD1CbOA8xkIMXzNQvVzllA4PYq19qlSGhr2Uogvc6EppPZcD9&s=10" alt="" className='h-112 w-full rounded-lg' />
+              <img 
+                src={batcheData?.image_batche ? batcheData.image_batche : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRz6bqdqzVD1CbOA8xkIMXzNQvVzllA4PYq19qlSGhr2Uogvc6EppPZcD9&s=10'} 
+                alt="Imagen del lote" 
+                className='h-112 w-full rounded-lg object-cover' 
+              />
             </div>
         </div>
       </Tabs.Content>

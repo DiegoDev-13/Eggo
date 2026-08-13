@@ -73,3 +73,23 @@ export const removeLote = async (data) => {
         }
     }
 }
+
+//Para traer informacion general de lote mediante el id
+
+export const getDetailsBatche = async (batcheId) => {
+
+    try {
+        const {data, error} = await supabase.from('batches').select('*').eq('id', batcheId).single()
+
+        if(error) {
+            console.log(error.message)
+            throw new Error("Error al obtener información de lote");
+        }
+
+        return data
+    } catch (error) {
+        console.log(error.message)
+        throw new Error("Error al obtener información de lote");
+    }
+
+}

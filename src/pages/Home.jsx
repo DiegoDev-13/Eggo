@@ -1,11 +1,17 @@
 import { AppBar } from "../components/shared/AppBar"
 import { SpinnerLoading } from "../components/shared/SpinnerLoading"
 import { useLogOut } from "../hooks/auth/useLogOut"
+import { useGlobalStore } from "../store/global.store"
+import { useUserStore } from "../store/useUserStore"
 
 
 export const Home = () => {
 
     const {mutate, isPending} = useLogOut()
+
+    const {user, userData, isLoading} = useUserStore()
+
+    const {changeTheme} = useGlobalStore()
 
     const logOut = () => {
         mutate()
@@ -15,11 +21,11 @@ export const Home = () => {
 
   return (
     <>
-        <AppBar />
+        <AppBar userData={userData} />
 
 
         <div className='mt-10 w-full flex items-center justify-center'>
-            <button className='p-3 bg-purple-600 text-white rounded-md cursor-pointer' onClick={() => setIsDark(!isDark)}>
+            <button className='p-3 bg-purple-600 text-white rounded-md cursor-pointer' onClick={() => changeTheme()}>
                 Chagen Theme
             </button>
             

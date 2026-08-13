@@ -9,7 +9,7 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
 
     const isOpen = activeBatchId === data.id;
 
-    const {setActiveModalDatailsBatche, setBatcheDetails} = useGlobalStore() 
+    const {setActiveModalDatailsBatche, setBatcheDetails, setBatcheIdDetails} = useGlobalStore() 
 
     const handleToggleOptions = () => {
         if (isOpen) {
@@ -24,6 +24,7 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
     const handleDetails = () => {
         console.log(`El id del lote es ${data.id}`)
         setBatcheDetails(data)
+        setBatcheIdDetails(data.id)
         setActiveModalDatailsBatche(true)
     }
 

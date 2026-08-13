@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import { useDeleteBatche } from "../../hooks/batches/useDeleteBatche";
 import { SpinnerLoading } from "./SpinnerLoading";
 import { useNavigate } from "react-router-dom";
+import { useGlobalStore } from "../../store/global.store";
 
 export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDatailsBatche, batcheDetails}) => {
 
@@ -19,6 +20,8 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
     const {userData} = useUserStore()
 
     const {mutate, isPending} = useDeleteBatche()
+
+    const {batcheIdDetails, setBatcheIdDetails} = useGlobalStore()
 
     // Se bloquea el scroll del body cuando el modal esté abierto
     useEffect(() => {
@@ -37,7 +40,7 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
         document.getElementById('modalDetails').classList.add('animated-exitRight')
         setTimeout(() => {
             setActiveModalDatailsBatche(false);
-            
+            setBatcheIdDetails(null)
         }, 400);
     };
 
@@ -118,7 +121,7 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
 
                             <div className="bg-slate-100 dark:bg-theme-secondary-dark overflow-y-auto py-4 px-8 flex flex-col space-y-3"> 
                                 <BatchesDatailsMetricCards />
-                                <FarmTabsBatches />
+                                <FarmTabsBatches batcheIdDetails={batcheIdDetails} />
                             </div> 
 
                             
@@ -130,18 +133,6 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
                                         <LuCirclePlus size={22} className="text-white" />
                                         Registrar Producción
                                     </button>
-                                    {/* <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
-                                        <MdOutlineHeartBroken size={22} /> 
-                                        Anotar Muertes
-                                    </button> 
-                                    <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
-                                        <MdOutlineVaccines size={22} /> 
-                                        Agregar Vacunación
-                                    </button> 
-                                    <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
-                                        <MdOutlineEggAlt size={22} /> 
-                                        Agregar Alimento
-                                    </button>  */}
                                     <div className="w-full h-px bg-gray-400" />
                                     <button className="px-6 py-2 text-red-500 font-semibold flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleDelete}> 
                                         <FaRegTrashAlt size={18} /> 
