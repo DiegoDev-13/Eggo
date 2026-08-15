@@ -14,10 +14,15 @@ import { PiMoneyFill, PiTagSimpleLight } from "react-icons/pi";
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { RiErrorWarningLine, RiTruckLine } from "react-icons/ri";
 import { GiChicken } from "react-icons/gi";
+import { useGlobalStore } from "../../store/global.store";
+import { useGetBatcheById } from "../../hooks/batches/useGetBatcheById";
+import { useEditBatche } from "../../hooks/batches/useEditBatche";
 
 export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) => {
 
     const {userData} = useUserStore()
+
+    const {batcheIdDetails, setBatcheIdDetails} = useGlobalStore()
 
     // Se bloquea el scroll del body cuando el modal esté abierto
     useEffect(() => {
@@ -32,9 +37,13 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
         };
     }, []);
 
-    const {mutate, isPending, isError} = useAddBatche()
+    const {data, isLoading} = useGetBatcheById(batcheIdDetails)
+    // console.log(data)    
+
+    const {mutate: mutateAddBatche, isPending, isError} = useAddBatche()
+    const {mutate: mutateEditBatche, isPending: isPendingEditBatche, isError: isErrorEditBatche} = useEditBatche()
     
-    const {register, handleSubmit, formState: {errors}} = useForm({
+    const {register, handleSubmit, formState: {errors}, reset } = useForm({
         resolver: zodResolver(useAddBatcheShema)
     })
 
@@ -42,6 +51,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
     const onSubmit = data => {
 
         const dataBatche = {
+            batcheId: batcheIdDetails,
             userId: userData.user_id,
             nameBatche: data.nameBatche,
             dateAdmission: data.dateAdmission,
@@ -58,16 +68,46 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
             AdditionalNotes: data.AdditionalNotes
         }
         
-        // console.log(dataBatche)
+        console.log(dataBatche)
 
-      mutate({dataBatche})
+        batcheIdDetails ? mutateEditBatche({dataBatche}) : mutateAddBatche({dataBatche})
+      
   }
 
+   useEffect(() => {
+        if(data && batcheIdDetails) {
+            reset({
+                nameBatche: data.name_batche,
+                dateAdmission: data.date_of_admission?.split("T")[0], // Limpia formato de fecha si es necesario
+                birthDate: data.birthDate?.split("T")[0],
+                geneticLine: data.genetic_line,
+                initialAmount: data.initial_amount,
+                totalDeaths: data.total_deaths || 0,
+                totalSold: data.total_sold || 0,
+                batcheLocation: data.farm_location,
+                nameSupplier: data.supplier,
+                batchleader: data.batch_lead,
+                AdditionalNotes: data.additional_notes
+            });
+        }
+    }, [batcheIdDetails, data, reset])
+
     const handleClose = () => {
+        setBatcheIdDetails(null)
         setActiveModalAddBatche(false);
     };
 
-    // if(true) return <h1 className="text-2xl">cargando...</h1>
+    // console.log(batcheIdDetails)
+
+    if (batcheIdDetails && isLoading) {
+        return (
+            <div className="w-full h-full fixed top-0 left-0 inset-0 bg-black/50 backdrop-blur-[1px] flex justify-center items-center z-50">
+                <div className="bg-white p-10 rounded-lg">
+                    <SpinnerLoading />
+                </div>
+            </div>
+        );
+    }
 
 
     return (
@@ -77,7 +117,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
                 
                 
                 {
-                    isPending 
+                    isPending || isPendingEditBatche
                         ? <div className="w-full h-200 bg-white rounded-lg">
                             <SpinnerLoading />
                         </div>
@@ -88,7 +128,13 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
                                         <GiChicken size={26} className="text-green-600" /> 
                                     </div> 
                                     <div className="flex flex-col space-y-0"> 
-                                        <h2 className="text-black dark:text-white text-lg font-medium">Crear Nuevo Lote</h2> 
+                                        {
+                                            batcheIdDetails
+                                                ? <h2 className="text-black dark:text-white text-lg font-medium">Edite el lote numero #{batcheIdDetails}</h2> 
+                                                : <h2 className="text-black dark:text-white text-lg font-medium">Crear Nuevo Lote</h2> 
+                                        }
+
+                                        
                                         <span className="text-gray-700 dark:text-gray-400 text-sm font-medium">Registre un nuevo lote de aves de corral ingresando su información general.</span> 
                                     </div> 
                                 </div> 
@@ -271,13 +317,20 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
                             </div> 
 
                             <div className="w-full h-20 dark:bg-theme-primary-dark border-t border-gray-400 py-5 px-6 rounded-t-lg flex justify-between items-center shrink-0"> 
-                                <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300"> 
+                                <button className="px-6 py-2 font-semibold flex items-center gap-2 rounded-lg border border-gray-400 hover:border-gray-900 dark:text-gray-300 dark:border-gray-500 hover:dark:text-white hover:dark:border-white cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleClose}> 
                                     Cancelar
                                 </button> 
+                                
+                                {
+                                    batcheIdDetails 
+                                        ? <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border border-black dark:border-none px-6 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleSubmit(onSubmit)}>
+                                            Guardar
+                                        </button>
+                                        : <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border border-black dark:border-none px-6 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleSubmit(onSubmit)}>
+                                            Registrar Producción
+                                        </button>
+                                }
 
-                                <button type="button" className="bg-primaryDark-green hover:bg-primary-green dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold border border-black dark:border-none px-6 py-2 rounded-lg flex items-center gap-2 cursor-pointer hover:scale-102 transition-all duration-300" onClick={handleSubmit(onSubmit)}>
-                                    Registrar Producción
-                                </button>
                             </div>
                         </>
                 }

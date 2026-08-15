@@ -40,6 +40,7 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
                     // Pasamos una función que setea null para que el botón "X" de cerrar funcione
                     setActiveBatchId={setActiveBatchId} 
                     handleDelete={handleDelete}
+                    batcheId={data.id}
                 />
             )
         }

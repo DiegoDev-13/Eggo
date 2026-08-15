@@ -56,6 +56,7 @@ export const getBatches = async (userId) => {
     }
 }   
 
+//Para Eliminar un lote mediante el id
 export const removeLote = async (data) => {
     try {
         console.log(data)
@@ -75,7 +76,6 @@ export const removeLote = async (data) => {
 }
 
 //Para traer informacion general de lote mediante el id
-
 export const getDetailsBatche = async (batcheId) => {
 
     try {
@@ -92,4 +92,33 @@ export const getDetailsBatche = async (batcheId) => {
         throw new Error("Error al obtener información de lote");
     }
 
+}
+
+//Para editar un lote 
+export const editBatche = async (dataBatche) => {
+    try {
+        const {error } = await supabase.from('batches').update({
+            name_batche: dataBatche.nameBatche,
+            genetic_line: dataBatche.geneticLine,
+            birthDate: dataBatche.birthDate,
+            date_of_admission: dataBatche.dateAdmission,
+            initial_amount: dataBatche.initialAmount,
+            total_deaths: dataBatche.totalDeaths,
+            total_sold: dataBatche.totalSold,
+            current_quantity: dataBatche.currentQuantity,
+            farm_location: dataBatche.batcheLocation,
+            supplier: dataBatche.nameSupplier,
+            batch_lead: dataBatche.batchleader,
+            additional_notes: dataBatche.AdditionalNotes
+
+        }).eq('id', dataBatche.batcheId)
+
+        if(error ) {
+            console.log(error.message)
+            throw new Error("Error al intentar editar lote");
+        }
+    } catch (error) {
+        console.log(error.message)
+        throw new Error("Error al intentar editar lote");
+    }
 }

@@ -1,7 +1,16 @@
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa"
 import { IoMdClose } from "react-icons/io"
+import { useGlobalStore } from "../../store/global.store"
 
-export const MoreOptionsCardBatches = ({setActiveBatchId, handleDelete}) => {
+export const MoreOptionsCardBatches = ({setActiveBatchId, handleDelete, batcheId}) => {
+
+    const {activeModalAddBatche, setActiveModalAddBatche, setBatcheIdDetails} = useGlobalStore()
+
+    const handleEditBatche = () => {
+        setBatcheIdDetails(batcheId)
+        setActiveModalAddBatche(!activeModalAddBatche)
+    }
+
   return (
     <div className="absolute top-14 -right-22 bg-white dark:bg-theme-third-dark dark:border-gray-500 w-35 z-10 px-4 py-8 flex flex-col justify-center space-y-4 border border-gray-700 rounded-lg sideScaleFast">
     
@@ -9,7 +18,7 @@ export const MoreOptionsCardBatches = ({setActiveBatchId, handleDelete}) => {
             <IoMdClose size={18} className="dark:text-gray-100 dark:hover:text-gray-400 hover:scale-120 transition-all duration-300" />
         </button>
 
-        <button type="button" className="flex items-center gap-2 cursor-pointer bg-blue-500 px-2 py-0.5 rounded-lg text-white font-semibold hover:scale-105 transition-all duration-200">
+        <button type="button" className="flex items-center gap-2 cursor-pointer bg-blue-500 px-2 py-0.5 rounded-lg text-white font-semibold hover:scale-105 transition-all duration-200" onClick={() => handleEditBatche()}>
             <FaRegEdit size={18} />
             Editar
         </button>
