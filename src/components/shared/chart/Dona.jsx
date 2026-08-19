@@ -9,7 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export function Dona({isDark}) {
 
   const data = {
-    labels: ['Grade A (Celan)', 'Grade B (Dirty/Broken)',],
+    labels: ['Grado A (Limpio)', 'Grado B (sucio / roto)',],
     datasets: [
       {
         label: 'Huevos',

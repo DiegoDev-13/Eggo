@@ -20,7 +20,7 @@ export const TableProduction = ({tableHeader}) => {
                 <tr key={1} className="border-b border-stone-400" >
                     <td className="p-4 tracking-tighter">
                         <span className={`font-semibol rounded-lg text-[17px] dark:text-gray-200`}> 
-                            Oct 17 (Today)
+                            Oct 17 (Hoy)
                         </span>
                     </td>
                     <td className="p-4 tracking-tighter">

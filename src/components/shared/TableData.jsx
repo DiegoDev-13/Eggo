@@ -25,7 +25,7 @@ export const TableData = ({tableHeader}) => {
                     </td>
                     <td className="p-4 tracking-tighter ">
                         <span className={`font bg-green-500/30 dark:bg-green-500/15 font-medium text-green-700 dark:text-green-500 px-2 py-0.5 uppercase rounded-lg text-xs`}> 
-                            production
+                            producción
                         </span>
                     </td>
                     <td className="p-4 font-medium tracking-tighter max-w-25 ">
@@ -52,7 +52,7 @@ export const TableData = ({tableHeader}) => {
                     </td>
                     <td className="p-4 tracking-tighter ">
                         <span className={`font bg-green-500/30 dark:bg-green-500/15 font-medium text-green-700 dark:text-green-500 px-2 py-0.5 uppercase rounded-lg text-[14px]`}> 
-                            feeding
+                            alimentación
                         </span>
                     </td>
                     <td className="p-4 font-medium tracking-tighter max-w-25 ">

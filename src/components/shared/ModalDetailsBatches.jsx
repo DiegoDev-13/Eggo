@@ -12,6 +12,7 @@ import { useDeleteBatche } from "../../hooks/batches/useDeleteBatche";
 import { SpinnerLoading } from "./SpinnerLoading";
 import { useNavigate } from "react-router-dom";
 import { useGlobalStore } from "../../store/global.store";
+import { useGetBatcheById } from "../../hooks/batches/useGetBatcheById";
 
 export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDatailsBatche, batcheDetails}) => {
 
@@ -21,7 +22,10 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
 
     const {mutate, isPending} = useDeleteBatche()
 
-    const {batcheIdDetails, setBatcheIdDetails} = useGlobalStore()
+    const {batcheIdDetails, setBatcheIdDetails, setActiveModalAddBatche, activeModalAddBatche} = useGlobalStore()
+
+
+    const {data: batcheData, isLoading, isError} = useGetBatcheById(batcheIdDetails)
 
     // Se bloquea el scroll del body cuando el modal esté abierto
     useEffect(() => {
@@ -55,8 +59,8 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
             confirmButtonText: "Si eliminar!"
             }).then((result) => {
             if (result.isConfirmed) {
-                console.log(batcheDetails.id)
-                console.log(userData.user_id)
+                // console.log(batcheDetails.id)
+                // console.log(userData.user_id)
 
                 const data = {
                     batcheId: batcheDetails.id,
@@ -72,6 +76,13 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
     const handleProduction = () => {
         setActiveModalDatailsBatche(false);
         navigate('/produccion')
+    }
+
+    const handleEdit = () => {
+        handleClose()
+
+        setBatcheIdDetails(batcheDetails.id)
+        setActiveModalAddBatche(!activeModalAddBatche)
     }
 
   return (
@@ -95,13 +106,20 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
                                 <h2 className="text-black dark:text-white text-lg font-medium">Batch Detail: {batcheDetails.name_batche}</h2> 
                                 <span className="text-gray-700 dark:text-gray-300 text-sm font-medium">Code: BATCH-{batcheDetails.id} Updated 2 hours ago</span> 
                                 </div> 
-                                <div className="px-3 py-0.2 rounded-full bg-green-600/15 dark:bg-green-600/10 border border-green-600 dark:border-green-500 flex items-center gap-1"> 
-                                    <div className="h-3 w-3 bg-green-600 dark:bg-green-500 rounded-full" /> 
-                                    <h4 className="dark:text-green-500">Active</h4> 
-                                </div> 
+                                {
+                                    batcheData?.state
+                                        ? <div className="px-3 py-0.2 rounded-full bg-green-600/15 dark:bg-green-600/10 border border-green-600 dark:border-green-500 flex items-center gap-1"> 
+                                            <div className="h-3 w-3 bg-green-600 dark:bg-green-500 rounded-full" /> 
+                                            <h4 className="dark:text-green-500">Activo</h4> 
+                                        </div> 
+                                        : <div className="px-3 py-0.2 rounded-full bg-red-600/15 dark:bg-red-600/10 border border-red-600 dark:border-red-500 flex items-center gap-1"> 
+                                            <div className="h-3 w-3 bg-red-600 dark:bg-red-500 rounded-full" /> 
+                                            <h4 className="dark:text-red-500">Inactivo</h4> 
+                                        </div> 
+                                }
                             </div> 
                             <div className="flex items-center space-x-3"> 
-                                <button className="px-3 py-1 dark:text-gray-300 hover:dark:text-white font-semibold flex items-center gap-2 rounded-lg border border-gray-400 dark:border-gray-500 hover:border-gray-900 hover:dark:border-white cursor-pointer hover:scale-105 transition-all duration-300"> 
+                                <button className="px-3 py-1 dark:text-gray-300 hover:dark:text-white font-semibold flex items-center gap-2 rounded-lg border border-gray-400 dark:border-gray-500 hover:border-gray-900 hover:dark:border-white cursor-pointer hover:scale-105 transition-all duration-300" onClick={handleEdit}> 
                                     <MdOutlineEdit size={22} /> Editar Lote 
                                 </button> 
                                 <button className="cursor-pointer"> 
@@ -120,8 +138,8 @@ export const ModalDetailsBatches = ({activeModalDatailsBatche, setActiveModalDat
                         <div className=" grid grid-cols-[75%_25%] flex-1 min-h-0 overflow-hidden rounded-b-lg"> 
 
                             <div className="bg-slate-100 dark:bg-theme-secondary-dark overflow-y-auto py-4 px-8 flex flex-col space-y-3"> 
-                                <BatchesDatailsMetricCards />
-                                <FarmTabsBatches batcheIdDetails={batcheIdDetails} />
+                                <BatchesDatailsMetricCards batcheData={batcheData} />
+                                <FarmTabsBatches batcheIdDetails={batcheIdDetails} batcheData={batcheData} isLoading={isLoading} />
                             </div> 
 
                             

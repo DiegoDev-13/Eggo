@@ -95,9 +95,12 @@ export const getDetailsBatche = async (batcheId) => {
 }
 
 //Para editar un lote 
-export const editBatche = async (dataBatche) => {
+export const editBatche = async ({dataBatche}) => {
     try {
-        const {error } = await supabase.from('batches').update({
+
+        // console.log(dataBatche)
+
+        const { error } = await supabase.from('batches').update({
             name_batche: dataBatche.nameBatche,
             genetic_line: dataBatche.geneticLine,
             birthDate: dataBatche.birthDate,

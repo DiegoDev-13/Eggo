@@ -68,7 +68,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
             AdditionalNotes: data.AdditionalNotes
         }
         
-        console.log(dataBatche)
+        // console.log(dataBatche)
 
         batcheIdDetails ? mutateEditBatche({dataBatche}) : mutateAddBatche({dataBatche})
       
@@ -93,8 +93,12 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
     }, [batcheIdDetails, data, reset])
 
     const handleClose = () => {
-        setBatcheIdDetails(null)
+        document.getElementById('modalAdd').classList.add('animated-exitRight')
+        setTimeout(() => {
+            setBatcheIdDetails(null)
         setActiveModalAddBatche(false);
+        }, 400);
+        
     };
 
     // console.log(batcheIdDetails)
@@ -113,7 +117,7 @@ export const ModalAddBatche = ({activeModalAddBatche, setActiveModalAddBatche}) 
     return (
         <div className="w-full h-full fixed top-0 left-0 inset-0 bg-black/50 backdrop-blur-[1px] flex justify-center items-center z-50" onClick={handleClose}> 
       {/* SE AGREGÓ: max-h-[90vh], max-w-5xl, w-full, flex y flex-col */}
-            <div id="modalDetails" className="max-h-[90vh] w-[70%] max-w-7xl bg-white animated-sideRight rounded-lg flex flex-col" onClick={(e) => e.stopPropagation()}> 
+            <div id="modalAdd" className="max-h-[90vh] w-[70%] max-w-7xl bg-white animated-sideRight rounded-lg flex flex-col" onClick={(e) => e.stopPropagation()}> 
                 
                 
                 {

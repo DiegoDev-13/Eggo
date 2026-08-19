@@ -22,7 +22,6 @@ export const CardBatches = ({data, activeBatchId, setActiveBatchId, handleDelete
     };
 
     const handleDetails = () => {
-        console.log(`El id del lote es ${data.id}`)
         setBatcheDetails(data)
         setBatcheIdDetails(data.id)
         setActiveModalDatailsBatche(true)
